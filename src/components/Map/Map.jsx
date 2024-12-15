@@ -17,7 +17,15 @@ export default function Map({ userLocation, placeCoordinates }) {
     // Initialize the Leaflet map only if it hasn't been initialized already
     if (!mapRef.current) {
       mapRef.current = leaflet
-        .map(divRef.current)
+        .map(divRef.current, {
+          center: [userLocation.latitude, userLocation.longitude],
+          zoom: 13,
+          dragging: true, // Enable dragging for mobile
+          touchZoom: true, // Enable touch zoom for mobile
+          scrollWheelZoom: false, // Prevent scroll-wheel zoom to avoid interference
+          doubleClickZoom: true, // Allow double-click zoom
+          boxZoom: true, // Enable box zoom
+        })
         .setView([userLocation.latitude, userLocation.longitude], 13);
 
       // Add the tile layer (OpenStreetMap tiles)
@@ -71,5 +79,16 @@ export default function Map({ userLocation, placeCoordinates }) {
     }
   }, [userLocation, placeCoordinates]);
 
-  return <div id="map" ref={divRef} style={{ height: "100vh" }}></div>;
+  // Add responsive styles for the map container
+  return (
+    <div
+      id="map"
+      ref={divRef}
+      style={{
+        height: "100vh", // Full viewport height
+        width: "100%", // Full viewport width
+        touchAction: "none", // Prevent default browser gestures on touch
+      }}
+    ></div>
+  );
 }
