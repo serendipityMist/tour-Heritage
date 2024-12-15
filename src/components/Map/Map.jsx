@@ -1,97 +1,234 @@
-import { useEffect, useRef } from "react";
-import leaflet from "leaflet";
+import React, { useEffect, useRef, useCallback, useMemo } from "react";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
+import "leaflet-routing-machine/dist/leaflet-routing-machine.css";
 import "leaflet-routing-machine";
 
-export default function Map({ userLocation, placeCoordinates }) {
-  const divRef = useRef(); // Ref for the map container
-  const mapRef = useRef(null); // Ref for the Leaflet map instance
-  const userMarkerRef = useRef(null); // Ref for the user marker
-  const placeMarkerRef = useRef(null); // Ref for the place marker
+// Fix default marker icon issue
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl:
+    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png",
+  iconUrl:
+    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png",
+  shadowUrl:
+    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
+});
+
+export default function Map({
+  userLocation,
+  placeCoordinates,
+  onRouteCalculated,
+}) {
+  // Unique identifier to prevent map container conflicts
+  const mapContainerId = useRef(
+    `map-${Math.random().toString(36).substr(2, 9)}`
+  );
+
+  // Refs to manage map and map-related objects
+  const mapRef = useRef(null);
+  const routingControlRef = useRef(null);
+  const markersRef = useRef([]);
+
+  // Memoize locations to prevent unnecessary re-renders
+  const userLocationMemo = useMemo(
+    () => ({
+      latitude: userLocation?.latitude,
+      longitude: userLocation?.longitude,
+    }),
+    [userLocation]
+  );
+
+  const placeCoordinatesMemo = useMemo(
+    () => ({
+      lat: placeCoordinates?.lat,
+      lng: placeCoordinates?.lng,
+    }),
+    [placeCoordinates]
+  );
+
+  // Comprehensive cleanup function
+  const cleanupMap = useCallback(() => {
+    // Remove all markers
+    if (markersRef.current) {
+      markersRef.current.forEach((marker) => {
+        if (mapRef.current) {
+          mapRef.current.removeLayer(marker);
+        }
+      });
+      markersRef.current = [];
+    }
+
+    // Remove routing control
+    if (routingControlRef.current) {
+      if (mapRef.current) {
+        mapRef.current.removeControl(routingControlRef.current);
+      }
+      routingControlRef.current = null;
+    }
+
+    // Remove map entirely
+    if (mapRef.current) {
+      mapRef.current.remove();
+      mapRef.current = null;
+    }
+  }, []);
 
   useEffect(() => {
-    if (!userLocation.latitude || !userLocation.longitude) {
-      console.error("User location is not available.");
+    // Validate user location
+    if (!userLocationMemo.latitude || !userLocationMemo.longitude) {
+      console.warn("User location is not available.");
       return;
     }
 
-    // Initialize the Leaflet map only if it hasn't been initialized already
-    if (!mapRef.current) {
-      mapRef.current = leaflet
-        .map(divRef.current, {
-          center: [userLocation.latitude, userLocation.longitude],
-          zoom: 13,
-          dragging: true, // Enable dragging for mobile
-          touchZoom: true, // Enable touch zoom for mobile
-          scrollWheelZoom: false, // Prevent scroll-wheel zoom to avoid interference
-          doubleClickZoom: true, // Allow double-click zoom
-          boxZoom: true, // Enable box zoom
-        })
-        .setView([userLocation.latitude, userLocation.longitude], 13);
+    // Ensure previous map is cleaned up
+    cleanupMap();
 
-      // Add the tile layer (OpenStreetMap tiles)
-      leaflet
-        .tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-          maxZoom: 19,
-          attribution:
-            '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-        })
-        .addTo(mapRef.current);
-    }
+    // Create new map instance
+    mapRef.current = L.map(mapContainerId.current, {
+      center: [userLocationMemo.latitude, userLocationMemo.longitude],
+      zoom: 13,
+      attributionControl: true,
+      zoomControl: true,
+      dragging: true,
+      touchZoom: true,
+      scrollWheelZoom: false,
+    });
 
-    // Add or update user marker
-    if (userMarkerRef.current) {
-      mapRef.current.removeLayer(userMarkerRef.current); // Remove old user marker
-    }
+    // Add tile layer
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      maxZoom: 19,
+      minZoom: 3,
+    }).addTo(mapRef.current);
 
-    userMarkerRef.current = leaflet
-      .marker([userLocation.latitude, userLocation.longitude])
+    // Create user marker
+    const userMarker = L.marker([
+      userLocationMemo.latitude,
+      userLocationMemo.longitude,
+    ])
       .addTo(mapRef.current)
-      .bindPopup("User's Location");
+      .bindPopup("Your Location")
+      .openPopup();
 
-    // Add or update place marker
-    if (placeCoordinates && placeCoordinates.lat && placeCoordinates.lng) {
-      if (placeMarkerRef.current) {
-        mapRef.current.removeLayer(placeMarkerRef.current); // Remove old place marker
+    markersRef.current.push(userMarker);
+
+    // Create custom taxi icon
+    const taxiIcon = L.icon({
+      iconUrl: "/path/to/taxi-icon.png", // Replace with your icon path
+      iconSize: [40, 40],
+      iconAnchor: [20, 40],
+    });
+
+    // Add place marker if coordinates exist
+    if (placeCoordinatesMemo.lat && placeCoordinatesMemo.lng) {
+      const placeMarker = L.marker(
+        [placeCoordinatesMemo.lat, placeCoordinatesMemo.lng],
+        { icon: taxiIcon }
+      )
+        .addTo(mapRef.current)
+        .bindPopup("Destination")
+        .openPopup();
+
+      markersRef.current.push(placeMarker);
+    }
+
+    // Map click event for routing
+    const handleMapClick = (e) => {
+      // Clear existing routing control
+      if (routingControlRef.current) {
+        mapRef.current.removeControl(routingControlRef.current);
       }
 
-      placeMarkerRef.current = leaflet
-        .marker([placeCoordinates.lat, placeCoordinates.lng])
-        .addTo(mapRef.current)
-        .bindPopup("Place");
+      // Create new markers
+      const startMarker = L.marker([
+        userLocationMemo.latitude,
+        userLocationMemo.longitude,
+      ]).addTo(mapRef.current);
 
-      // Add routing without showing the directions text
-      leaflet.Routing.control({
+      const endMarker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(
+        mapRef.current
+      );
+
+      markersRef.current.push(startMarker, endMarker);
+
+      // Create routing control
+      routingControlRef.current = L.Routing.control({
         waypoints: [
-          leaflet.latLng(userLocation.latitude, userLocation.longitude),
-          leaflet.latLng(placeCoordinates.lat, placeCoordinates.lng),
+          L.latLng(userLocationMemo.latitude, userLocationMemo.longitude),
+          L.latLng(e.latlng.lat, e.latlng.lng),
         ],
         routeWhileDragging: true,
-        createMarker: function () {
-          return null; // Prevent the creation of route step markers
-        },
+        show: true,
+        addWaypoints: false,
+        fitSelectedRoutes: true,
+        showAlternatives: false,
       }).addTo(mapRef.current);
-    }
 
-    // Adjust map to fit both markers in the view
-    if (placeCoordinates && placeCoordinates.lat && placeCoordinates.lng) {
-      const bounds = leaflet.latLngBounds(
-        [userLocation.latitude, userLocation.longitude],
-        [placeCoordinates.lat, placeCoordinates.lng]
-      );
-      mapRef.current.fitBounds(bounds, { padding: [50, 50] });
-    }
-  }, [userLocation, placeCoordinates]);
+      // Handle route calculation
+      routingControlRef.current.on("routesfound", (event) => {
+        const routes = event.routes;
+        if (routes && routes.length > 0) {
+          const route = routes[0];
+          onRouteCalculated &&
+            onRouteCalculated({
+              distance: route.summary.totalDistance,
+              time: route.summary.totalTime,
+              coordinates: route.coordinates,
+            });
 
-  // Add responsive styles for the map container
+          // Optional: Animate marker along route
+          const animateMarker = (marker, routeCoords) => {
+            let currentIndex = 0;
+            const animationInterval = setInterval(() => {
+              if (currentIndex < routeCoords.length) {
+                marker.setLatLng([
+                  routeCoords[currentIndex].lat,
+                  routeCoords[currentIndex].lng,
+                ]);
+                currentIndex++;
+              } else {
+                clearInterval(animationInterval);
+              }
+            }, 100);
+          };
+
+          animateMarker(endMarker, route.coordinates);
+        }
+      });
+
+      // Error handling
+      routingControlRef.current.on("routingerror", (error) => {
+        console.error("Routing error:", error);
+      });
+    };
+
+    // Add click event listener
+    mapRef.current.on("click", handleMapClick);
+
+    // Cleanup function
+    return () => {
+      // Remove click event
+      if (mapRef.current) {
+        mapRef.current.off("click", handleMapClick);
+      }
+
+      // Comprehensive cleanup
+      cleanupMap();
+    };
+  }, [userLocationMemo, placeCoordinatesMemo, cleanupMap, onRouteCalculated]);
+
   return (
     <div
-      id="map"
-      ref={divRef}
+      id={mapContainerId.current}
       style={{
-        height: "100vh", // Full viewport height
-        width: "100%", // Full viewport width
-        touchAction: "none", // Prevent default browser gestures on touch
+        height: "100%",
+        width: "100%",
+        minHeight: "400px",
+        position: "relative",
+        zIndex: 1,
       }}
-    ></div>
+    />
   );
 }
