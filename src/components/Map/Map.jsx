@@ -59,13 +59,16 @@ export default function Map({ userLocation, placeCoordinates }) {
         .addTo(mapRef.current)
         .bindPopup("Place");
 
-      // Add routing
+      // Add routing without showing the directions text
       leaflet.Routing.control({
         waypoints: [
           leaflet.latLng(userLocation.latitude, userLocation.longitude),
           leaflet.latLng(placeCoordinates.lat, placeCoordinates.lng),
         ],
         routeWhileDragging: true,
+        createMarker: function () {
+          return null; // Prevent the creation of route step markers
+        },
       }).addTo(mapRef.current);
     }
 
