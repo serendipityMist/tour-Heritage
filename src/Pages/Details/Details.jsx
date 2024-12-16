@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { culturalHeritages, touristPlaces } from "../../constants"; // Import your data
-import axios from "axios"; // For making API requests
-import Map from "../../components/Map/Map"; // Import the Map component
+import { culturalHeritages, touristPlaces } from "../../constants";
+import axios from "axios";
+import Map from "../../components/Map/Map";
 
 const Details = () => {
   const { id } = useParams();
@@ -16,7 +16,7 @@ const Details = () => {
   useEffect(() => {
     const placeData = [...culturalHeritages, ...touristPlaces].find(
       (item) => item.id === parseInt(id)
-    ); // Find the place by ID
+    );
     setPlace(placeData);
 
     if (placeData) {
@@ -24,79 +24,92 @@ const Details = () => {
       fetchCoordinates(placeLocation);
     }
 
-    // Get user's current location
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setUserLocation(position.coords);
-        },
-        (error) => {
-          console.error("Error getting user location:", error);
-        }
+        (position) => setUserLocation(position.coords),
+        (error) => console.error("Error getting user location:", error)
       );
     } else {
       console.log("Geolocation is not supported by this browser.");
     }
   }, [id]);
 
-  // Fetch coordinates for a location (place) using the OpenCage API
   const fetchCoordinates = async (locationName) => {
     try {
       const response = await axios.get(
         `https://api.opencagedata.com/geocode/v1/json?q=${locationName}&key=${geocodingApiKey}`
       );
-      const result = response.data.results[0]; // Get the first result
+      const result = response.data.results[0];
       if (result) {
         const { lat, lng } = result.geometry;
         setPlaceCoordinates({ lat, lng });
-      } else {
-        console.error("No coordinates found for the location");
       }
     } catch (error) {
       console.error("Error fetching coordinates:", error);
     }
   };
 
-  // Callback to update distance when route is calculated
   const handleRouteCalculated = (routeData) => {
     if (routeData && routeData.distance) {
-      setDistance((routeData.distance / 1000).toFixed(2)); // Convert meters to kilometers
+      setDistance((routeData.distance / 1000).toFixed(2));
     }
   };
 
   return (
-    <section className="border border-red-700 p-2">
+    <section className="p-4 bg-gray-100 rounded-lg shadow-md">
       {place ? (
         <div>
-          {/* the following div is a video holder */}
-          <div className="w-full border bg-red-400">
-            {/* <video src=""></video> */}
-            <img src={place.imageUrl} alt="" className="w-full h-[350px]" />
+          {/* Video Player */}
+          <div className="w-full bg-gray-200 rounded-lg overflow-hidden shadow-lg mb-4">
+            {place.vid ? (
+              <video
+                className="w-full h-[350px] object-cover"
+                src={place.vid}
+                autoPlay
+                controls
+                playsInline
+                preload="auto"
+                poster={place.imageUrl}
+              >
+                Your browser does not support the video tag.
+              </video>
+            ) : (
+              <img
+                src={place.imageUrl}
+                alt={place.name}
+                className="w-full h-[350px] object-cover"
+              />
+            )}
           </div>
-          <h1 className="text-2xl font-bold">{place.name}</h1>
-          <h2 className="text-xl font-bold">{place.location}</h2>
-          <p className="text-lg">{place.description}</p>
 
+          {/* Place Details */}
+          <h1 className="text-2xl font-bold text-gray-800">{place.name}</h1>
+          <h2 className="text-lg text-gray-600 mb-2">{place.location}</h2>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            {place.detailedDescription}
+          </p>
+
+          {/* Distance Information */}
           {distance ? (
-            <p>
-              The distance from your current location to {place.name} is{" "}
-              {distance} km.
+            <p className="text-sm font-semibold text-blue-600">
+              The distance from your current location to{" "}
+              <span className="font-bold">{place.name}</span> is {distance} km.
             </p>
           ) : (
-            <p>Loading distance...</p>
+            <p className="text-sm text-gray-500">Loading distance...</p>
           )}
 
-          {/* Pass user location and place coordinates to the Map */}
+          {/* Map */}
           {userLocation && placeCoordinates && (
             <Map
               userLocation={userLocation}
               placeCoordinates={placeCoordinates}
-              onRouteCalculated={handleRouteCalculated} // Pass the callback
+              onRouteCalculated={handleRouteCalculated}
             />
           )}
         </div>
       ) : (
-        <p>Loading place details...</p>
+        <p className="text-center text-gray-500">Loading place details...</p>
       )}
     </section>
   );

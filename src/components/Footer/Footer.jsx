@@ -1,42 +1,96 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/Logo.png";
-function Footer() {
+
+const Footer = () => {
   return (
-    <footer className="text-white bg-black w-full flex p-2">
-      <aside>
-        <Link to="/" className="flex items-center">
-          <img src={logo} className="mr-3 h-40 w-40" alt="Logo" />
-        </Link>
-      </aside>
-      <section className="p-2 m-2 border border-white">
-        <h1>Resources</h1>
-        <div className="text-white font-bold">
-          <Link
-            to="/"
-            className=" hover:bg-gray-50 focus:ring-4  font-medium rounded-lg text-sm block px-4 lg:px-5 py-2 lg:py-2.5 mr-2 "
-          >
-            Home
-          </Link>
-          <Link
-            to="about"
-            className=" hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
-          >
-            About US
-          </Link>
-        </div>
-      </section>
-      <section>
-        <h1>Follow US</h1>
+    <footer className="bg-black text-gray-300 py-8">
+      <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
+        {/* Company Info */}
         <div>
-          <a href="https://www.instagram.com/" target="_blank">
-            <img src={logo} alt="" width={40} height={40} />
-            Instagram
-          </a>
+          <h2 className="text-xl font-semibold mb-3">GPT</h2>
+          <p>
+            Experience the rich cultural heritage and breathtaking landscapes of
+            Nepal. From ancient temples and vibrant festivals to the majestic
+            Himalayas, we bring you unforgettable journeys into the heart of
+            Nepal's traditions and natural beauty.
+          </p>
         </div>
-      </section>
+
+        {/* Important Links */}
+        <div>
+          <h3 className="text-lg font-semibold mb-2">IMPORTANT LINKS</h3>
+          <ul className="space-y-1">
+            <li>
+              <Link to="/about-us" className="hover:text-white">
+                About Us
+              </Link>
+            </li>
+            <li>
+              <Link to="/contact-us" className="hover:text-white">
+                Contact Us
+              </Link>
+            </li>
+
+            <li>
+              <Link to="/privacy-policy" className="hover:text-white">
+                Privacy Policy
+              </Link>
+            </li>
+            <li>
+              <Link to="/terms" className="hover:text-white">
+                Terms & Conditions
+              </Link>
+            </li>
+          </ul>
+        </div>
+
+        {/* Contact Us */}
+        <div>
+          <h3 className="text-lg font-semibold mb-2">CONTACT US</h3>
+          <ul>
+            <li>GPT Ltd.</li>
+            <li>Gyaneshwor,Kathmandu</li>
+            {/* <li>Jacksonville, Fl 32256</li> */}
+            <li>
+              Phone:{" "}
+              <a href="tel:+11234567890" className="hover:text-white">
+                98232457XX
+              </a>
+            </li>
+            <li>
+              Email:{" "}
+              <a
+                href="mailto:xyz@example.com"
+                className="hover:text-white underline"
+              >
+                gpt@gmail.com
+              </a>
+            </li>
+          </ul>
+        </div>
+        {/* Top Tour Locations */}
+        <div>
+          <h3 className="text-lg font-semibold mb-2">Newsletter</h3>
+          <form>
+            <input
+              type="email"
+              placeholder="Your email address"
+              className="p-1 rounded-lg"
+            />
+            <button className="border  border-black p-1 ml-1 bg-white text-gray-400 rounded-lg font-bold">
+              Send
+            </button>
+          </form>
+        </div>
+      </div>
+
+      {/* Bottom Bar */}
+      <div className="border-t border-gray-700 mt-8 pt-4 text-center text-sm">
+        © Copyright 2024 | All rights reserved
+      </div>
     </footer>
   );
-}
+};
 
 export default Footer;

@@ -14,7 +14,7 @@ export default function Navbar() {
   };
 
   return (
-    <header className="shadow sticky z-50 top-0">
+    <header className="shadow bg-transparent z-50 top-0 bg-gradient-to-r from-yellow-500 via-red-600 to-yellow-500 text-black">
       {" "}
       {/* Change z-99 to z-50 */}
       <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2">

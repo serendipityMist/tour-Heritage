@@ -1,148 +1,298 @@
 // Import images from assets folder
 import everestImage from "../assets/HomeImg/everest.jpeg";
 import pashupatiImage from "../assets/HomeImg/pashupati.jpeg";
-
+import basantapur from "../assets/VIdeos/Basantapur.mp4";
+import janakpur from "../assets/VIdeos/Janakpur.mp4";
+import pashupati from "../assets/VIdeos/Pasupatinath.mp4";
+import swyambhu from "../assets/VIdeos/Swyambhu.mp4";
+import hotelHeritage from "../assets/Images/hotel ambassador.jpg";
+import hotelManang from "../assets/Images/HOtel the rani mahal.jpg";
+import hotelCityPark from "../assets/Images/Hotel city part janakpur.jpg";
+import hotelMysticMithilia from "../assets/Images/mystic mithila janakpur.jpg";
+import hotelHolyHimalaya from "../assets/Images/Hotel everest view.jpg";
+import hotelGaneshHimal from "../assets/Images/Hotel aagaman.jpg";
+import hotelManaslu from "../assets/Images/meraki wellness retreat.jpg";
+import syambhuPeace from "../assets/Images/Swayambhu.jpg";
+import imgBasantapur from "../assets/Images/Basantapur.jpg";
+import imgJanakpur from "../assets/Images/Janakpur.jpg";
+import imgPashupati from "../assets/Images/pasupatinath.jpg";
+import imgSwayambhu from "../assets/Images/Swayambhu.jpg";
 // Cultural Heritages Data
 export const culturalHeritages = [
+  // Basantapur Durbar Square
   {
     id: 1,
-    name: "Pashupatinath Temple",
-    location: "Pashupatinath, Kathmandu",
-    description: "A sacred Hindu temple dedicated to Lord Shiva.",
+    name: "Basantapur Durbar Square",
+    location: "Kathmandu, Nepal",
+    description:
+      "A UNESCO World Heritage Site showcasing ancient Nepalese architecture and culture.",
     detailedDescription:
-      "Pashupatinath Temple is one of the most significant Hindu temples of Lord Shiva in the world. Situated on the banks of the Bagmati River, it is a UNESCO World Heritage Site, recognized for its religious, cultural, and historical significance. The temple attracts thousands of devotees and sadhus annually, especially during the Maha Shivaratri festival.",
-    type: "Religious",
-    yearInscribed: 1979,
-    UNESCOWorldHeritage: true,
-    imageUrl: everestImage, // Use imported image
+      "Basantapur Durbar Square, also known as Kathmandu Durbar Square, is a historic complex of palaces, courtyards, and temples. It represents the artistic and cultural brilliance of the Malla and Shah dynasties. The site is vibrant with cultural festivals and local crafts.",
+    vid: basantapur,
+    img: imgBasantapur,
+    hotels: [
+      {
+        id: 18,
+        name: "Hotel Heritage",
+        location: "Kathmandu, Nepal",
+        img: hotelHeritage,
+        description:
+          "A boutique hotel blending traditional charm with modern amenities.",
+        detailedDescription:
+          "Hotel Heritage is a premium hotel offering a mix of Nepalese heritage design and contemporary comfort. Located close to Basantapur, it is perfect for cultural explorers.",
+        amenities: ["Cultural Decor", "Fine Dining", "Event Space"],
+      },
+      {
+        id: 19,
+        name: "Hotel Manang",
+        location: "Kathmandu, Nepal",
+        img: hotelManang,
+        description:
+          "A comfortable hotel with easy access to cultural landmarks.",
+        detailedDescription:
+          "Hotel Manang offers a cozy stay with modern facilities, making it an excellent choice for visitors exploring Basantapur and surrounding heritage sites.",
+        amenities: [
+          "Free Wi-Fi",
+          "Multi-Cuisine Restaurant",
+          "Tour Assistance",
+        ],
+      },
+    ],
   },
+
+  // Janakpur
   {
     id: 2,
-    name: "Swayambhunath Stupa (Monkey Temple)",
-    location: "Kathmandu",
-    description: "An ancient religious complex atop a hill.",
+    name: "Janakpur Dham",
+    location: "Janakpur, Nepal",
+    img: imgJanakpur,
+    description:
+      "A sacred city known for the Janaki Temple and its cultural significance.",
     detailedDescription:
-      "Swayambhunath Stupa, also known as the Monkey Temple, is one of the oldest religious sites in Nepal. The iconic white dome with its golden spire is adorned with the all-seeing eyes of Buddha. The site offers a panoramic view of the Kathmandu Valley and is an important pilgrimage site for both Buddhists and Hindus.",
-    type: "Religious",
-    yearInscribed: 1979,
-    UNESCOWorldHeritage: true,
-    imageUrl: pashupatiImage, // Use imported image
+      "Janakpur is a holy city associated with the epic Ramayana, being the birthplace of Goddess Sita. The Janaki Temple, an architectural marvel, attracts devotees and tourists alike. It is also a hub for Mithila art and culture.",
+    vid: janakpur,
+    hotels: [
+      {
+        id: 20,
+        name: "Hotel City Park",
+        location: "Janakpur, Nepal",
+        img: hotelCityPark,
+        description:
+          "A modern hotel with excellent amenities for a comfortable stay.",
+        detailedDescription:
+          "Hotel City Park provides a blend of modern luxury and traditional hospitality. Located near Janaki Temple, it is an ideal base for pilgrims and travelers.",
+        amenities: ["Restaurant", "Meeting Rooms", "Cultural Tours"],
+      },
+      {
+        id: 21,
+        name: "Hotel Mystic Mithila",
+        location: "Janakpur, Nepal",
+        img: hotelMysticMithilia,
+        description:
+          "A charming hotel reflecting the essence of Mithila culture.",
+        detailedDescription:
+          "Hotel Mystic Mithila is inspired by the rich Mithila heritage. It offers a serene stay with beautiful decor and authentic local cuisine.",
+        amenities: ["Local Art Displays", "Traditional Meals", "Garden Views"],
+      },
+    ],
   },
+
+  // Pashupatinath Temple
   {
     id: 3,
-    name: "Kathmandu Durbar Square",
-    location: "Kathmandu",
-    description:
-      "A historical palace square showcasing Nepalese art and culture.",
+    name: "Pashupatinath Temple",
+    location: "Kathmandu, Nepal",
+    description: "A revered Hindu temple dedicated to Lord Shiva.",
+    img: imgPashupati,
     detailedDescription:
-      "Kathmandu Durbar Square, also known as Hanuman Dhoka Durbar, is a historic and cultural epicenter. It was the royal palace of the Malla and Shah kings until the 19th century. The square is filled with temples, courtyards, and idols that reflect the traditional Newari architecture and craftsmanship. It is a vibrant spot where history, culture, and daily life converge.",
-    type: "Historical",
-    yearInscribed: 1979,
-    UNESCOWorldHeritage: true,
-    imageUrl: everestImage, // Use imported image
+      "Pashupatinath Temple is one of the most sacred Hindu pilgrimage sites, attracting thousands of devotees annually. The complex features ancient shrines, ghats, and a vibrant spiritual atmosphere.",
+    vid: pashupati,
+    hotels: [
+      {
+        id: 22,
+        name: "Hotel Holy Himalaya",
+        location: "Kathmandu, Nepal",
+        description: "A serene hotel offering comfort near Pashupatinath.",
+        img: hotelHolyHimalaya,
+        detailedDescription:
+          "Hotel Holy Himalaya provides a tranquil retreat with easy access to Pashupatinath Temple. Ideal for pilgrims and cultural enthusiasts.",
+        amenities: ["Meditation Space", "On-site Dining", "Temple Views"],
+      },
+      {
+        id: 23,
+        name: "Hotel Ganesh Himal",
+        location: "Kathmandu, Nepal",
+        img: hotelGaneshHimal,
+        description:
+          "A charming hotel with personalized service and cultural ambiance.",
+        detailedDescription:
+          "Hotel Ganesh Himal offers warm hospitality and traditional decor, making it a perfect base for exploring Pashupatinath and other heritage sites.",
+        amenities: ["Cultural Decor", "Free Breakfast", "Tour Assistance"],
+      },
+    ],
   },
+
+  // Swayambhunath Stupa
   {
     id: 4,
-    name: "Bhaktapur Durbar Square",
-    location: "Bhaktapur",
-    description: "A stunning example of medieval Nepalese architecture.",
+    name: "Swayambhunath Stupa",
+    location: "Kathmandu, Nepal",
+    img: imgSwayambhu,
+    description:
+      "An ancient stupa known as the Monkey Temple, offering panoramic views of Kathmandu.",
     detailedDescription:
-      "Bhaktapur Durbar Square is a UNESCO World Heritage Site that highlights the grandeur of the medieval Malla kingdom. The square features intricately carved wooden temples, stone sculptures, and traditional art. Famous landmarks include the Nyatapola Temple, Golden Gate, and the Palace of 55 Windows, each representing the rich cultural legacy of Bhaktapur.",
-    type: "Historical",
-    yearInscribed: 1979,
-    UNESCOWorldHeritage: true,
-    imageUrl: pashupatiImage, // Use imported image
-  },
-  {
-    id: 5,
-    name: "Patan Durbar Square",
-    location: "Lalitpur, Nepal",
-    description: "Known for its temples, courtyards, and museum.",
-    detailedDescription:
-      "Patan Durbar Square is a marvel of Newari architecture, filled with historic temples, statues, and shrines. The Krishna Mandir, a temple entirely made of stone, is a highlight. The Patan Museum within the square houses an impressive collection of artifacts, showcasing the art and culture of the Kathmandu Valley.",
-    type: "Historical",
-    yearInscribed: 1979,
-    UNESCOWorldHeritage: true,
-    imageUrl: everestImage, // Use imported image
-  },
-  {
-    id: 6,
-    name: "Lumbini",
-    location: "Rupandehi",
-    description: "The birthplace of Lord Buddha.",
-    detailedDescription:
-      "Lumbini, the birthplace of Siddhartha Gautama (Lord Buddha), is a UNESCO World Heritage Site and a major pilgrimage destination for Buddhists. The Maya Devi Temple marks the exact spot where Buddha was born. The site is surrounded by monasteries built by various Buddhist communities from around the world, creating a serene and spiritual environment.",
-    type: "Religious",
-    yearInscribed: 1997,
-    UNESCOWorldHeritage: true,
-    imageUrl: pashupatiImage, // Use imported image
-  },
-  {
-    id: 7,
-    name: "Chitwan National Park",
-    location: "Chitwan",
-    description: "Known for its biodiversity, including rhinos and tigers.",
-    detailedDescription:
-      "Chitwan National Park, the first national park in Nepal, is a UNESCO World Heritage Site. It is home to a diverse range of wildlife, including the endangered one-horned rhinoceros and Bengal tiger. Visitors can enjoy jungle safaris, bird watching, and canoe rides while exploring the park's rich flora and fauna.",
-    type: "Natural",
-    yearInscribed: 1984,
-    UNESCOWorldHeritage: true,
-    imageUrl: everestImage, // Use imported image
-  },
-  {
-    id: 8,
-    name: "Sagarmatha National Park",
-    location: "Solukhumbu",
-    description: "Home to Mount Everest and Sherpa culture.",
-    detailedDescription:
-      "Sagarmatha National Park encompasses the majestic Mount Everest and is a UNESCO World Heritage Site. It is a haven for trekkers and mountaineers, offering breathtaking views and a chance to explore the Sherpa culture. The park is also known for its diverse ecosystems, including rare species like the snow leopard.",
-    type: "Natural",
-    yearInscribed: 1979,
-    UNESCOWorldHeritage: true,
-    imageUrl: pashupatiImage, // Use imported image
-  },
-  {
-    id: 9,
-    name: "Rara Lake",
-    location: "Mugu",
-    description: "The largest lake in Nepal, surrounded by scenic beauty.",
-    detailedDescription:
-      "Rara Lake is the largest and deepest freshwater lake in Nepal, located within Rara National Park. It is surrounded by lush forests and snow-capped mountains, offering a serene escape for nature lovers. The lake is also culturally significant for the local communities who revere it as a sacred site.",
-    type: "Natural",
-    UNESCOWorldHeritage: false,
-    imageUrl: everestImage, // Use imported image
-  },
-  {
-    id: 10,
-    name: "Manakamana Temple",
-    location: "Gorkha",
-    description: "A sacred temple believed to fulfill wishes.",
-    detailedDescription:
-      "Manakamana Temple is a highly revered Hindu temple dedicated to Goddess Manakamana, the goddess of wishes. Located atop a hill, the temple is accessible by a scenic cable car ride. Devotees believe that worshiping here fulfills their wishes and brings prosperity.",
-    type: "Religious",
-    UNESCOWorldHeritage: false,
-    imageUrl: everestImage, // Use imported image
+      "Swayambhunath Stupa is a historic Buddhist site with a unique blend of Hindu and Buddhist symbolism. Its iconic white dome and golden spire attract both pilgrims and tourists. The hilltop location provides breathtaking views of the Kathmandu Valley.",
+    vid: swyambhu,
+    hotels: [
+      {
+        id: 24,
+        name: "Hotel Manaslu",
+        location: "Kathmandu, Nepal",
+        description: "A heritage hotel with a blend of tradition and luxury.",
+        img: hotelManaslu,
+        detailedDescription:
+          "Hotel Manaslu showcases traditional Nepalese architecture and modern amenities. Its proximity to Swayambhunath makes it an excellent choice for heritage enthusiasts.",
+        amenities: ["Swimming Pool", "Traditional Decor", "Fine Dining"],
+      },
+      {
+        id: 25,
+        name: "Swayambhu Peace Guest House",
+        location: "Kathmandu, Nepal",
+        description: "A peaceful guest house near Swayambhunath Stupa.",
+        img: syambhuPeace,
+        detailedDescription:
+          "Swayambhu Peace Guest House offers a serene environment and friendly hospitality. Perfect for visitors looking to explore the spiritual charm of Swayambhunath.",
+        amenities: ["Rooftop Terrace", "Free Wi-Fi", "Local Cuisine"],
+      },
+    ],
   },
 ];
 
 // Tourist Places Data
+
 export const touristPlaces = [
+  // Langtang
   {
-    id: 101,
-    name: "Thamel",
-    location: "Kathmandu",
-    description: "A popular tourist hub for shopping and dining.",
+    id: 1,
+    name: "Langtang",
+    location: "Langtang National Park, Nepal",
+    description:
+      "A stunning valley known for its breathtaking landscapes and trekking routes.",
     detailedDescription:
-      "Thamel is renowned for its vibrant streets, shops, and restaurants...",
-    imageUrl: pashupatiImage, // Use imported image
+      "Langtang Valley is renowned for its majestic mountains, lush forests, and rich culture. It offers various trekking options, including the famous Langtang trek, which leads to the beautiful Kyanjin Gompa.",
+    hotels: [
+      {
+        id: 30,
+        name: "Langtang Valley Lodge",
+        location: "Kyanjin Gompa, Langtang",
+        description: "A cozy lodge with stunning mountain views.",
+        detailedDescription:
+          "Langtang Valley Lodge provides comfortable accommodation with local cuisine, making it an excellent base for trekkers exploring the Langtang region.",
+        amenities: ["Free Wi-Fi", "Restaurant", "Guided Treks"],
+      },
+      {
+        id: 31,
+        name: "Kyanjin Gompa Hotel",
+        location: "Kyanjin Gompa, Langtang",
+        description: "A friendly hotel offering a warm atmosphere.",
+        detailedDescription:
+          "Kyanjin Gompa Hotel is perfect for trekkers, providing basic amenities and delicious local meals.",
+        amenities: ["Hot Showers", "Local Cuisine", "Tour Assistance"],
+      },
+    ],
   },
+
+  // Mount Everest
   {
-    id: 102,
-    name: "Chitwan National Park",
-    location: "Chitwan",
-    description: "A wildlife reserve famous for its biodiversity.",
+    id: 2,
+    name: "Mount Everest",
+    location: "Sagarmatha National Park, Nepal",
+    description:
+      "The highest mountain in the world, attracting adventurers and climbers.",
     detailedDescription:
-      "Chitwan National Park is a UNESCO site known for rhinos, tigers, and lush greenery...",
-    imageUrl: everestImage, // Use imported image
+      "Mount Everest, known as Sagarmatha in Nepali, is a major destination for trekkers and climbers. The Everest Base Camp trek offers stunning views and a chance to experience the unique Sherpa culture.",
+    hotels: [
+      {
+        id: 32,
+        name: "Everest View Hotel",
+        location: "Syangboche, near Namche Bazaar",
+        description: "A luxury hotel with breathtaking views of Mount Everest.",
+        detailedDescription:
+          "Everest View Hotel is one of the highest-placed hotels in the world, offering stunning views of Everest and comfortable accommodations.",
+        amenities: ["Panoramic Views", "Restaurant", "Wi-Fi"],
+      },
+      {
+        id: 33,
+        name: "Lukla Hotel",
+        location: "Lukla, Nepal",
+        description: "A comfortable hotel serving trekkers heading to Everest.",
+        detailedDescription:
+          "Lukla Hotel provides cozy rooms and is a convenient stop for those starting their Everest adventure.",
+        amenities: ["Free Breakfast", "Tour Desk", "Wi-Fi"],
+      },
+    ],
+  },
+
+  // Pokhara
+  {
+    id: 3,
+    name: "Pokhara",
+    location: "Pokhara, Nepal",
+    description:
+      "A beautiful city known for its lakes and stunning mountain views.",
+    detailedDescription:
+      "Pokhara is a major tourist destination in Nepal, famous for its serene lakes, adventure sports, and stunning views of the Annapurna mountain range.",
+    hotels: [
+      {
+        id: 34,
+        name: "Hotel Fewa Lake",
+        location: "Lakeside, Pokhara",
+        description: "A lakeside hotel with beautiful views of Fewa Lake.",
+        detailedDescription:
+          "Hotel Fewa Lake offers comfortable accommodations and easy access to local attractions, making it perfect for travelers.",
+        amenities: ["Lake Views", "Restaurant", "Free Wi-Fi"],
+      },
+      {
+        id: 35,
+        name: "Pokhara Grande Hotel",
+        location: "Pokhara, Nepal",
+        description: "A luxury hotel with modern amenities.",
+        detailedDescription:
+          "Pokhara Grande Hotel provides a luxurious stay with excellent facilities and stunning views of the Himalayas.",
+        amenities: ["Spa", "Swimming Pool", "Fine Dining"],
+      },
+    ],
+  },
+
+  // Mustang
+  {
+    id: 4,
+    name: "Mustang",
+    location: "Mustang District, Nepal",
+    description:
+      "A remote region known for its unique culture and stunning landscapes.",
+    detailedDescription:
+      "Mustang, often referred to as the Last Forbidden Kingdom, is known for its Tibetan culture, ancient monasteries, and breathtaking landscapes. The region offers trekking routes that are less traveled.",
+    hotels: [
+      {
+        id: 36,
+        name: "Hotel Mustang Resort",
+        location: "Jomsom, Mustang",
+        description:
+          "A comfortable resort with beautiful views of the Himalayas.",
+        detailedDescription:
+          "Hotel Mustang Resort offers cozy accommodations and serves as a great base for exploring the Mustang region.",
+        amenities: ["Restaurant", "Garden", "Free Wi-Fi"],
+      },
+      {
+        id: 37,
+        name: "Thakali Lodge",
+        location: "Kagbeni, Mustang",
+        description: "A charming lodge reflecting local architecture.",
+        detailedDescription:
+          "Thakali Lodge provides a warm atmosphere and delicious local cuisine, making it a perfect stop for trekkers.",
+        amenities: ["Local Cuisine", "Cultural Tours", "Free Breakfast"],
+      },
+    ],
   },
 ];

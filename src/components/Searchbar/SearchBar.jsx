@@ -57,7 +57,7 @@ const SearchBar = () => {
         placeholder="Search location"
         value={query}
         onChange={handleInputChange}
-        className="w-full p-3 border border-gray-400 rounded-lg focus:outline-blue-500"
+        className="w-full p-3 bg-white/40 text-white placeholder-white border border-white/70 rounded-lg focus:outline-none focus:ring-1 focus:ring-white focus:ring-opacity-75"
         autoFocus
         onFocus={() => setIsExpanded(true)} // Expand on focus
       />
@@ -67,12 +67,12 @@ const SearchBar = () => {
 
       {/* Dropdown List */}
       {isExpanded && filteredResults.length > 0 && (
-        <ul className="absolute z-10 w-full sm:max-w-md md:max-w-lg bg-white border rounded shadow-lg mt-2 max-h-60 overflow-y-auto">
+        <ul className="absolute z-10 w-full sm:max-w-md md:max-w-lg bg-white/70 backdrop-blur-lg border border-white/50 rounded shadow-lg mt-2 max-h-60 overflow-y-auto">
           {filteredResults.map((item) => (
             <li
               key={item.id}
               onClick={() => handleResultClick(item.id)}
-              className="p-2 hover:bg-gray-100 cursor-pointer"
+              className="p-2 text-black hover:bg-gray-100 cursor-pointer"
             >
               <strong>{item.name}</strong> <span>({item.location})</span>
             </li>
