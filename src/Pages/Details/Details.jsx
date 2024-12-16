@@ -5,24 +5,22 @@ import axios from "axios"; // For making API requests
 import Map from "../../components/Map/Map"; // Import the Map component
 
 const Details = () => {
-  const { id } = useParams(); // Get the id from URL params
+  const { id } = useParams();
   const [place, setPlace] = useState(null);
-  const [distance, setDistance] = useState(null); // State to hold the distance
-  const [userLocation, setUserLocation] = useState(null); // State to hold user's current location
-  const [placeCoordinates, setPlaceCoordinates] = useState(null); // State to hold the place's coordinates
+  const [distance, setDistance] = useState(null);
+  const [userLocation, setUserLocation] = useState(null);
+  const [placeCoordinates, setPlaceCoordinates] = useState(null);
 
-  const geocodingApiKey = "1930f5e639b649d99651106ac130c5a2"; // Replace with your API key
+  const geocodingApiKey = "1930f5e639b649d99651106ac130c5a2";
 
   useEffect(() => {
-    // Fetch the place details based on the id from URL
     const placeData = [...culturalHeritages, ...touristPlaces].find(
       (item) => item.id === parseInt(id)
     ); // Find the place by ID
     setPlace(placeData);
 
-    // Fetch place coordinates based on the location name
     if (placeData) {
-      const placeLocation = placeData.location; // Assuming location is just the name (e.g., "Kathmandu")
+      const placeLocation = placeData.location;
       fetchCoordinates(placeLocation);
     }
 
@@ -59,35 +57,27 @@ const Details = () => {
     }
   };
 
-  useEffect(() => {
-    // Once the user's location and place data are available, calculate the distance
-    if (userLocation && placeCoordinates) {
-      const { latitude, longitude } = userLocation;
-      const { lat, lng } = placeCoordinates;
-
-      // Ensure both coordinates are available before calculating distance
-      if (latitude && longitude && lat && lng) {
-        const userLatLng = L.latLng(latitude, longitude);
-        const placeLatLng = L.latLng(lat, lng);
-
-        // Calculate the distance in kilometers
-        const distanceInKm = userLatLng.distanceTo(placeLatLng) / 1000; // Distance in kilometers
-        setDistance(distanceInKm.toFixed(2)); // Store the distance with 2 decimal points
-      } else {
-        console.error("Invalid coordinates for user or place");
-      }
+  // Callback to update distance when route is calculated
+  const handleRouteCalculated = (routeData) => {
+    if (routeData && routeData.distance) {
+      setDistance((routeData.distance / 1000).toFixed(2)); // Convert meters to kilometers
     }
-  }, [userLocation, placeCoordinates]);
+  };
 
   return (
-    <div>
+    <section className="border border-red-700 p-2">
       {place ? (
         <div>
-          <h2>{place.name}</h2>
-          <p>{place.location}</p>
-          <p>{place.description}</p>
+          {/* the following div is a video holder */}
+          <div className="w-full border bg-red-400">
+            {/* <video src=""></video> */}
+            <img src={place.imageUrl} alt="" className="w-full h-[350px]" />
+          </div>
+          <h1 className="text-2xl font-bold">{place.name}</h1>
+          <h2 className="text-xl font-bold">{place.location}</h2>
+          <p className="text-lg">{place.description}</p>
 
-          {distance && userLocation ? (
+          {distance ? (
             <p>
               The distance from your current location to {place.name} is{" "}
               {distance} km.
@@ -101,13 +91,14 @@ const Details = () => {
             <Map
               userLocation={userLocation}
               placeCoordinates={placeCoordinates}
+              onRouteCalculated={handleRouteCalculated} // Pass the callback
             />
           )}
         </div>
       ) : (
         <p>Loading place details...</p>
       )}
-    </div>
+    </section>
   );
 };
 

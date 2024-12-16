@@ -1,21 +1,19 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { culturalHeritages, touristPlaces } from "../../constants";
-import { FiSearch } from "react-icons/fi"; // Import the search icon
 
 const SearchBar = () => {
   const [query, setQuery] = useState("");
   const [filteredResults, setFilteredResults] = useState([]);
-  const [isExpanded, setIsExpanded] = useState(false); // New: To control expansion
-  const searchBarRef = useRef(null); // Ref to detect clicks outside
+  const [isExpanded, setIsExpanded] = useState(false);
+  const searchBarRef = useRef(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Close search bar when clicking outside
     const handleClickOutside = (e) => {
       if (searchBarRef.current && !searchBarRef.current.contains(e.target)) {
         setIsExpanded(false);
-        setFilteredResults([]); // Clear results when collapsing
+        setFilteredResults([]);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -28,10 +26,10 @@ const SearchBar = () => {
 
     if (input.trim() === "") {
       setFilteredResults([]);
+      setIsExpanded(false); // Collapse if input is empty
       return;
     }
 
-    // Combine culturalHeritages and touristPlaces and filter based on location
     const combinedData = [...culturalHeritages, ...touristPlaces];
     const filtered = combinedData.filter(
       (item) =>
@@ -39,35 +37,42 @@ const SearchBar = () => {
         item.name.toLowerCase().includes(input.toLowerCase())
     );
     setFilteredResults(filtered);
+    setIsExpanded(filtered.length > 0); // Expand if there are results
   };
 
   const handleResultClick = (id) => {
     navigate(`/details/${id}`);
-
-    setFilteredResults([]);
+    setIsExpanded(false); // Close the search bar
+    setFilteredResults([]); // Clear results
+    setQuery(""); // Optionally clear the query
   };
 
   return (
-    <div ref={searchBarRef} className="relative w-full max-w-md mx-auto m-2">
-      {
-        <input
-          type="text"
-          placeholder="Search location"
-          value={query}
-          onChange={handleInputChange}
-          className="w-full p-2 border border-black  rounded-xl focus:outline-black text-black"
-          autoFocus
-        />
-      }
+    <div
+      ref={searchBarRef}
+      className="absolute z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full px-4 sm:max-w-md md:max-w-lg text-center"
+    >
+      <input
+        type="text"
+        placeholder="Search location"
+        value={query}
+        onChange={handleInputChange}
+        className="w-full p-3 border border-gray-400 rounded-lg focus:outline-blue-500"
+        autoFocus
+        onFocus={() => setIsExpanded(true)} // Expand on focus
+      />
+      <p className="mt-4 text-lg sm:text-2xl md:text-3xl font-bold text-white">
+        Where Would You Like To Go?
+      </p>
 
       {/* Dropdown List */}
-      {filteredResults.length > 0 && (
-        <ul className="absolute z-10 w-full bg-white border rounded shadow-lg mt-1 max-h-60 overflow-y-auto">
+      {isExpanded && filteredResults.length > 0 && (
+        <ul className="absolute z-10 w-full sm:max-w-md md:max-w-lg bg-white border rounded shadow-lg mt-2 max-h-60 overflow-y-auto">
           {filteredResults.map((item) => (
             <li
               key={item.id}
               onClick={() => handleResultClick(item.id)}
-              className="p-2 hover:bg-gray-200 cursor-pointer"
+              className="p-2 hover:bg-gray-100 cursor-pointer"
             >
               <strong>{item.name}</strong> <span>({item.location})</span>
             </li>

@@ -1,3 +1,8 @@
+// Import images from assets folder
+import everestImage from "../assets/HomeImg/everest.jpeg";
+import pashupatiImage from "../assets/HomeImg/pashupati.jpeg";
+
+// Cultural Heritages Data
 export const culturalHeritages = [
   {
     id: 1,
@@ -9,6 +14,7 @@ export const culturalHeritages = [
     type: "Religious",
     yearInscribed: 1979,
     UNESCOWorldHeritage: true,
+    imageUrl: everestImage, // Use imported image
   },
   {
     id: 2,
@@ -20,6 +26,7 @@ export const culturalHeritages = [
     type: "Religious",
     yearInscribed: 1979,
     UNESCOWorldHeritage: true,
+    imageUrl: pashupatiImage, // Use imported image
   },
   {
     id: 3,
@@ -32,6 +39,7 @@ export const culturalHeritages = [
     type: "Historical",
     yearInscribed: 1979,
     UNESCOWorldHeritage: true,
+    imageUrl: everestImage, // Use imported image
   },
   {
     id: 4,
@@ -43,17 +51,19 @@ export const culturalHeritages = [
     type: "Historical",
     yearInscribed: 1979,
     UNESCOWorldHeritage: true,
+    imageUrl: pashupatiImage, // Use imported image
   },
   {
     id: 5,
     name: "Patan Durbar Square",
-    location: "Lalitpur,Nepal",
+    location: "Lalitpur, Nepal",
     description: "Known for its temples, courtyards, and museum.",
     detailedDescription:
       "Patan Durbar Square is a marvel of Newari architecture, filled with historic temples, statues, and shrines. The Krishna Mandir, a temple entirely made of stone, is a highlight. The Patan Museum within the square houses an impressive collection of artifacts, showcasing the art and culture of the Kathmandu Valley.",
     type: "Historical",
     yearInscribed: 1979,
     UNESCOWorldHeritage: true,
+    imageUrl: everestImage, // Use imported image
   },
   {
     id: 6,
@@ -65,6 +75,7 @@ export const culturalHeritages = [
     type: "Religious",
     yearInscribed: 1997,
     UNESCOWorldHeritage: true,
+    imageUrl: pashupatiImage, // Use imported image
   },
   {
     id: 7,
@@ -76,6 +87,7 @@ export const culturalHeritages = [
     type: "Natural",
     yearInscribed: 1984,
     UNESCOWorldHeritage: true,
+    imageUrl: everestImage, // Use imported image
   },
   {
     id: 8,
@@ -87,6 +99,7 @@ export const culturalHeritages = [
     type: "Natural",
     yearInscribed: 1979,
     UNESCOWorldHeritage: true,
+    imageUrl: pashupatiImage, // Use imported image
   },
   {
     id: 9,
@@ -97,6 +110,7 @@ export const culturalHeritages = [
       "Rara Lake is the largest and deepest freshwater lake in Nepal, located within Rara National Park. It is surrounded by lush forests and snow-capped mountains, offering a serene escape for nature lovers. The lake is also culturally significant for the local communities who revere it as a sacred site.",
     type: "Natural",
     UNESCOWorldHeritage: false,
+    imageUrl: everestImage, // Use imported image
   },
   {
     id: 10,
@@ -107,9 +121,11 @@ export const culturalHeritages = [
       "Manakamana Temple is a highly revered Hindu temple dedicated to Goddess Manakamana, the goddess of wishes. Located atop a hill, the temple is accessible by a scenic cable car ride. Devotees believe that worshiping here fulfills their wishes and brings prosperity.",
     type: "Religious",
     UNESCOWorldHeritage: false,
+    imageUrl: everestImage, // Use imported image
   },
 ];
 
+// Tourist Places Data
 export const touristPlaces = [
   {
     id: 101,
@@ -118,6 +134,7 @@ export const touristPlaces = [
     description: "A popular tourist hub for shopping and dining.",
     detailedDescription:
       "Thamel is renowned for its vibrant streets, shops, and restaurants...",
+    imageUrl: pashupatiImage, // Use imported image
   },
   {
     id: 102,
@@ -126,5 +143,6 @@ export const touristPlaces = [
     description: "A wildlife reserve famous for its biodiversity.",
     detailedDescription:
       "Chitwan National Park is a UNESCO site known for rhinos, tigers, and lush greenery...",
+    imageUrl: everestImage, // Use imported image
   },
 ];

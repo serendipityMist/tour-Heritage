@@ -10,8 +10,8 @@ import {
 } from "react-router-dom";
 import Home from "./Pages/Home/Home.jsx";
 import Link2 from "./Pages/About/Link2.jsx";
-import Link1 from "./Pages/Contact/Link1.jsx";
-import Link3 from "./Pages/Link3/Link3.jsx";
+import Link1 from "./Pages/Explore/Link1.jsx";
+import Link3 from "./Pages/Activities/Link3.jsx";
 import Link4 from "./Pages/Link4/Link4.jsx";
 import Details from "./Pages/Details/Details.jsx";
 
@@ -20,8 +20,8 @@ const router = createBrowserRouter(
     <Route path="/" element={<App />}>
       <Route path="/" element={<Home />} />
       <Route path="about" element={<Link2 />} />
-      <Route path="contact" element={<Link1 />} />
-      <Route path="link3" element={<Link3 />} />
+      <Route path="activites" element={<Link1 />} />
+      <Route path="explore" element={<Link3 />} />
       <Route path="link4" element={<Link4 />} />
       <Route path="details/:id" element={<Details />} />
       {/* Add details route */}

@@ -4,6 +4,14 @@ import "leaflet/dist/leaflet.css";
 import "leaflet-routing-machine/dist/leaflet-routing-machine.css";
 import "leaflet-routing-machine";
 
+// Function to format distance
+const formatDistance = (distanceMeters) => {
+  if (distanceMeters < 1000) {
+    return `${Math.round(distanceMeters)} m`;
+  }
+  return `${(distanceMeters / 1000).toFixed(2)} km`;
+};
+
 // Fix default marker icon issue
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -75,16 +83,23 @@ export default function Map({
   }, []);
 
   useEffect(() => {
-    // Validate user location
-    if (!userLocationMemo.latitude || !userLocationMemo.longitude) {
-      console.warn("User location is not available.");
+    // Validate user location and destination coordinates
+    if (
+      !userLocationMemo.latitude ||
+      !userLocationMemo.longitude ||
+      !placeCoordinatesMemo.lat ||
+      !placeCoordinatesMemo.lng
+    ) {
+      console.warn(
+        "User location or destination coordinates are not available."
+      );
       return;
     }
 
     // Ensure previous map is cleaned up
     cleanupMap();
 
-    // Create new map instance
+    // Create new map instance with zooming enabled
     mapRef.current = L.map(mapContainerId.current, {
       center: [userLocationMemo.latitude, userLocationMemo.longitude],
       zoom: 13,
@@ -92,7 +107,9 @@ export default function Map({
       zoomControl: true,
       dragging: true,
       touchZoom: true,
-      scrollWheelZoom: false,
+      scrollWheelZoom: true,
+      doubleClickZoom: true,
+      zoomAnimation: true,
     });
 
     // Add tile layer
@@ -109,111 +126,93 @@ export default function Map({
       userLocationMemo.longitude,
     ])
       .addTo(mapRef.current)
-      .bindPopup("Your Location")
-      .openPopup();
+      .bindPopup("Your Location");
 
-    markersRef.current.push(userMarker);
+    // Create destination marker
+    const destinationMarker = L.marker([
+      placeCoordinatesMemo.lat,
+      placeCoordinatesMemo.lng,
+    ])
+      .addTo(mapRef.current)
+      .bindPopup("Destination");
 
-    // Create custom taxi icon
-    const taxiIcon = L.icon({
-      iconUrl: "/path/to/taxi-icon.png", // Replace with your icon path
-      iconSize: [40, 40],
-      iconAnchor: [20, 40],
+    markersRef.current.push(userMarker, destinationMarker);
+
+    // Automatically create routing control with distance display
+    routingControlRef.current = L.Routing.control({
+      waypoints: [
+        L.latLng(userLocationMemo.latitude, userLocationMemo.longitude),
+        L.latLng(placeCoordinatesMemo.lat, placeCoordinatesMemo.lng),
+      ],
+      routeWhileDragging: true,
+      show: true,
+      addWaypoints: false,
+      fitSelectedRoutes: true,
+      showAlternatives: false,
+      // Custom line style
+      lineOptions: {
+        styles: [
+          {
+            color: "blue",
+            opacity: 0.7,
+            weight: 5,
+          },
+        ],
+      },
+      // Enable distance display
+      createMarker: function (i, waypoint, n) {
+        return L.marker(waypoint.latLng, {
+          draggable: true,
+          // Optionally customize marker icons
+          icon: L.divIcon({
+            className: "route-marker",
+            html: `<div style="background-color: blue; width: 12px; height: 12px; border-radius: 50%;"></div>`,
+            iconSize: [12, 12],
+          }),
+        });
+      },
+    }).addTo(mapRef.current);
+
+    // Handle route calculation
+    routingControlRef.current.on("routesfound", (event) => {
+      const routes = event.routes;
+      if (routes && routes.length > 0) {
+        const route = routes[0];
+
+        // Extract distance directly from route summary
+        const routeDistance = route.summary.totalDistance; // in meters
+        const routeTime = route.summary.totalTime; // in seconds
+
+        onRouteCalculated &&
+          onRouteCalculated({
+            distance: routeDistance,
+            formattedDistance: formatDistance(routeDistance),
+            time: routeTime / 60, // convert to minutes
+            rawRouteTime: routeTime,
+            coordinates: route.coordinates,
+          });
+
+        // Fit map to show entire route
+        if (mapRef.current) {
+          const bounds = L.latLngBounds([
+            [userLocationMemo.latitude, userLocationMemo.longitude],
+            [placeCoordinatesMemo.lat, placeCoordinatesMemo.lng],
+          ]);
+          mapRef.current.fitBounds(bounds, {
+            padding: [50, 50],
+            maxZoom: 15,
+          });
+        }
+      }
     });
 
-    // Add place marker if coordinates exist
-    if (placeCoordinatesMemo.lat && placeCoordinatesMemo.lng) {
-      const placeMarker = L.marker(
-        [placeCoordinatesMemo.lat, placeCoordinatesMemo.lng],
-        { icon: taxiIcon }
-      )
-        .addTo(mapRef.current)
-        .bindPopup("Destination")
-        .openPopup();
-
-      markersRef.current.push(placeMarker);
-    }
-
-    // Map click event for routing
-    const handleMapClick = (e) => {
-      // Clear existing routing control
-      if (routingControlRef.current) {
-        mapRef.current.removeControl(routingControlRef.current);
-      }
-
-      // Create new markers
-      const startMarker = L.marker([
-        userLocationMemo.latitude,
-        userLocationMemo.longitude,
-      ]).addTo(mapRef.current);
-
-      const endMarker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(
-        mapRef.current
-      );
-
-      markersRef.current.push(startMarker, endMarker);
-
-      // Create routing control
-      routingControlRef.current = L.Routing.control({
-        waypoints: [
-          L.latLng(userLocationMemo.latitude, userLocationMemo.longitude),
-          L.latLng(e.latlng.lat, e.latlng.lng),
-        ],
-        routeWhileDragging: true,
-        show: true,
-        addWaypoints: false,
-        fitSelectedRoutes: true,
-        showAlternatives: false,
-      }).addTo(mapRef.current);
-
-      // Handle route calculation
-      routingControlRef.current.on("routesfound", (event) => {
-        const routes = event.routes;
-        if (routes && routes.length > 0) {
-          const route = routes[0];
-          onRouteCalculated &&
-            onRouteCalculated({
-              distance: route.summary.totalDistance,
-              time: route.summary.totalTime,
-              coordinates: route.coordinates,
-            });
-
-          // Optional: Animate marker along route
-          const animateMarker = (marker, routeCoords) => {
-            let currentIndex = 0;
-            const animationInterval = setInterval(() => {
-              if (currentIndex < routeCoords.length) {
-                marker.setLatLng([
-                  routeCoords[currentIndex].lat,
-                  routeCoords[currentIndex].lng,
-                ]);
-                currentIndex++;
-              } else {
-                clearInterval(animationInterval);
-              }
-            }, 100);
-          };
-
-          animateMarker(endMarker, route.coordinates);
-        }
-      });
-
-      // Error handling
-      routingControlRef.current.on("routingerror", (error) => {
-        console.error("Routing error:", error);
-      });
-    };
-
-    // Add click event listener
-    mapRef.current.on("click", handleMapClick);
+    // Error handling
+    routingControlRef.current.on("routingerror", (error) => {
+      console.error("Routing error:", error);
+    });
 
     // Cleanup function
     return () => {
-      // Remove click event
-      if (mapRef.current) {
-        mapRef.current.off("click", handleMapClick);
-      }
-
       // Comprehensive cleanup
       cleanupMap();
     };
@@ -221,9 +220,10 @@ export default function Map({
 
   return (
     <div
+      className="m-1"
       id={mapContainerId.current}
       style={{
-        height: "100%",
+        height: "50%",
         width: "100%",
         minHeight: "400px",
         position: "relative",
