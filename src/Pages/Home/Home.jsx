@@ -9,8 +9,6 @@ import basantapur from "../../assets/Images/Basantapur.jpg";
 import langtang from "../../assets/Images/lantang-valley.jpg";
 import mustang from "../../assets/Images/mustang.jpg";
 import hero from "./heroSection.jpg";
-import lumbini from "./lumbini.jpeg";
-import stupa from "./stupa.jpeg";
 import FAQAccordion from "../../components/Accordion/FAQAccordion";
 
 const Home = () => {

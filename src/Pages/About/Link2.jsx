@@ -87,7 +87,7 @@ function Link2() {
         <div className="md:w-1/2 bg-cover bg-center rounded-lg shadow-lg overflow-hidden mt-6 md:mt-0">
           <img
             src={lumbini} // Placeholder URL
-            alt="Heritage"
+            alt="lumbini Heritage"
             className="w-full h-full object-cover"
           />
         </div>

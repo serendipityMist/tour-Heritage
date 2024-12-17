@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import dayjs from "dayjs";
 
 // Calendar Component
@@ -155,7 +155,13 @@ const Link1 = () => {
   return (
     <section className="bg-[#f5f5f5] w-full">
       <div className="bg-[#f1EFEC] min-h-screen">
-        <div className="container mx-auto px-4 py-12 lg:px-8">
+        <div
+          variants={fadeIn("up", 0.2)}
+          initial="hidden"
+          whileInView={"show"}
+          viewport={{ once: false, amount: 0.7 }}
+          className="container mx-auto px-4 py-12 lg:px-8"
+        >
           {/* Title */}
           <div className="text-center mb-8">
             <h1 className="text-4xl font-bold text-[#283A2C]">
@@ -216,7 +222,13 @@ const Link1 = () => {
           </div>
 
           {/* Interactive Workshops Section */}
-          <div className="bg-white text-[#333] p-8 mt-12 rounded-lg shadow-xl">
+          <div
+            variants={fadeInBottom()}
+            initial="hidden"
+            whileInView={"show"}
+            viewport={{ once: false, amount: 0.7 }}
+            className="bg-white text-[#333] p-8 mt-12 rounded-lg shadow-xl"
+          >
             <div className="text-center mb-8">
               <h2 className="text-4xl font-bold">Interactive Workshops</h2>
               <p className="text-lg mt-2">
@@ -226,7 +238,13 @@ const Link1 = () => {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {/* Card 1 */}
-              <div className="group bg-[#ffffff] text-[#333] shadow-md rounded-lg p-6 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:bg-[#f9f9f9]">
+              <div
+                variants={fadeInBottom()}
+                initial="hidden"
+                whileInView={"show"}
+                viewport={{ once: false, amount: 0.7 }}
+                className="group bg-[#ffffff] text-[#333] shadow-md rounded-lg p-6 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:bg-[#f9f9f9]"
+              >
                 <h3 className="text-2xl font-semibold mb-2 group-hover:text-[#283A2C] transition-colors duration-300">
                   Cultural Seminars
                 </h3>
