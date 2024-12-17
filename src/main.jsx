@@ -14,6 +14,7 @@ import Link1 from "./Pages/Explore/Link1.jsx";
 import Link3 from "./Pages/Activities/Link3.jsx";
 import Link4 from "./Pages/Link4/Link4.jsx";
 import Details from "./Pages/Details/Details.jsx";
+import Login from "./Pages/LogInSignUp/Login.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -23,6 +24,7 @@ const router = createBrowserRouter(
       <Route path="activites" element={<Link1 />} />
       <Route path="explore" element={<Link3 />} />
       <Route path="link4" element={<Link4 />} />
+      <Route path="form" element={<Login />} />
       <Route path="details/:id" element={<Details />} />
 
       {/* Add details route */}

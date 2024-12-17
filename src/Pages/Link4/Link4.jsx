@@ -1,25 +1,27 @@
 import React from "react";
+import ContactForm from "../../components/ContactForm/ContactForm ";
+import AnimatedForm from "../../components/AnimatedForm/AnimatedForm";
 
 function Link4() {
   return (
-    <section>
-      <div className="bg-green-700 text-center">
-        <h1 className="font-bold text-3xl ">Our Location</h1>
-        <p className="w-1/2">
-          Located in Nepal, we are dedicated to showcasing the rich cultural
-          heritage and beautiful tourist spots of the region.
-        </p>
-      </div>
-      <div className="w-full bg-green-500 h-[400px]">
-        <div className="flex justify-evenly gap-2">
-          <h1 className="text-3xl font-bold">Get in Touch</h1>
-          <p className="font-medium">
-            Fill out the form below to reach out to us for any inquiries or
-            information.
-          </p>
+    <>
+      <section className="border border-red-600">
+        <div className="w-full bg-slate-500 py-8 px-4 text-white">
+          <div className="text-center mb-6">
+            <h1 className="text-3xl font-bold mb-2">Get in Touch</h1>
+            <p className="font-medium">
+              Fill out the form below to reach out to us for any inquiries or
+              information.
+            </p>
+          </div>
+
+          {/* Contact Form */}
+          <div className=" mx-auto">
+            <ContactForm />
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
 

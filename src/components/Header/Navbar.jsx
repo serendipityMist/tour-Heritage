@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import logo from "../../assets/Logo.png";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -14,14 +13,18 @@ export default function Navbar() {
   };
 
   return (
-    <header className="shadow bg-transparent z-50 top-0 bg-gradient-to-r text-black w-11/12 bg-green-600">
-      {" "}
-      {/* Change z-99 to z-50 */}
-      <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2">
+    <header className="z-50 w-[90%] bg-transparent mx-auto">
+      <nav className="bg-transparent border-gray-200 px-4 lg:px-6 py-2">
         <div className="flex flex-wrap justify-between items-center gap-2 mx-auto max-w-screen-xl">
-          <Link to="/" className="flex items-center">
-            <img src={logo} className="mr-3 h-12" alt="Logo" />
+          {/* Logo - Replaced with GptTours */}
+          <Link
+            to="/"
+            className="flex items-center text-3xl font-bold text-blue-500"
+          >
+            GptTours
           </Link>
+
+          {/* Mobile menu button */}
           <div className="lg:hidden flex items-center">
             <button
               onClick={toggleMenu}
@@ -43,6 +46,8 @@ export default function Navbar() {
               </svg>
             </button>
           </div>
+
+          {/* Navbar Links */}
           <div
             className={`${
               isMenuOpen ? "block" : "hidden"
@@ -56,9 +61,8 @@ export default function Navbar() {
                   onClick={closeMenu}
                   className={({ isActive }) =>
                     `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100
-                  ${
-                    isActive ? "text-orange-600" : "text-gray-500"
-                  } hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                  ${isActive ? "text-orange-600" : "text-gray-500"} 
+                  hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
                   }
                 >
                   Home
@@ -70,9 +74,8 @@ export default function Navbar() {
                   onClick={closeMenu}
                   className={({ isActive }) =>
                     `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100
-                  ${
-                    isActive ? "text-orange-600" : "text-gray-500"
-                  } hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                  ${isActive ? "text-orange-600" : "text-gray-500"} 
+                  hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
                   }
                 >
                   About Us
@@ -84,9 +87,8 @@ export default function Navbar() {
                   onClick={closeMenu}
                   className={({ isActive }) =>
                     `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100
-                  ${
-                    isActive ? "text-orange-600" : "text-gray-500"
-                  } hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                  ${isActive ? "text-orange-600" : "text-gray-500"} 
+                  hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
                   }
                 >
                   Explore
@@ -98,9 +100,8 @@ export default function Navbar() {
                   onClick={closeMenu}
                   className={({ isActive }) =>
                     `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100
-                  ${
-                    isActive ? "text-orange-600" : "text-gray-500"
-                  } hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                  ${isActive ? "text-orange-600" : "text-gray-500"} 
+                  hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
                   }
                 >
                   Activities
@@ -112,12 +113,24 @@ export default function Navbar() {
                   onClick={closeMenu}
                   className={({ isActive }) =>
                     `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100
-                  ${
-                    isActive ? "text-orange-600" : "text-gray-500"
-                  } hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                  ${isActive ? "text-orange-600" : "text-gray-500"} 
+                  hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
                   }
                 >
                   Contact Us
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/form"
+                  onClick={closeMenu}
+                  className={({ isActive }) =>
+                    `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100
+                  ${isActive ? "text-orange-600" : "text-gray-500"} 
+                  hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                  }
+                >
+                  LogIn/SignUp
                 </NavLink>
               </li>
             </ul>
