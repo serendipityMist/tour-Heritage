@@ -1,6 +1,4 @@
 // Import images from assets folder
-import everestImage from "../assets/HomeImg/everest.jpeg";
-import pashupatiImage from "../assets/HomeImg/pashupati.jpeg";
 import basantapur from "../assets/VIdeos/Basantapur.mp4";
 import janakpur from "../assets/VIdeos/Janakpur.mp4";
 import pashupati from "../assets/VIdeos/Pasupatinath.mp4";
@@ -12,11 +10,27 @@ import hotelMysticMithilia from "../assets/Images/mystic mithila janakpur.jpg";
 import hotelHolyHimalaya from "../assets/Images/Hotel everest view.jpg";
 import hotelGaneshHimal from "../assets/Images/Hotel aagaman.jpg";
 import hotelManaslu from "../assets/Images/meraki wellness retreat.jpg";
-import syambhuPeace from "../assets/Images/Swayambhu.jpg";
+import syambhuPeace from "../assets/Images/PAnorama Lodge and resturant.png";
 import imgBasantapur from "../assets/Images/Basantapur.jpg";
 import imgJanakpur from "../assets/Images/Janakpur.jpg";
 import imgPashupati from "../assets/Images/pasupatinath.jpg";
 import imgSwayambhu from "../assets/Images/Swayambhu.jpg";
+import langtang from "../assets/Images/lantang-valley.jpg";
+import langtangValleyLodge from "../assets/Images/hotel garangja.jpg";
+import kyanjinGompaHotel from "../assets/Images/HOtel devotee.jpg";
+import everest from "../assets/Images/Everest.jpg";
+import everestView from "../assets/Images/Hotel everest view.jpg";
+import luklaHotel from "../assets/Images/panaroma hotel and lodge.jpg";
+import pokhara from "../assets/Images/Pokhara.jpg";
+import hotelFewaLake from "../assets/Images/Hotel river view.jpg";
+import pokharaGrande from "../assets/Images/GLacier pokhra.jpg";
+import mustang from "../assets/Images/mustang.jpg";
+import hotelMustang from "../assets/Images/Manang lodge.jpg";
+import thakaliLodge from "../assets/Images/rubus hotel.jpg";
+import langtangVid from "../assets/VIdeos/Langtang.mp4";
+import mtEverest from "../assets/VIdeos/Mt everest.mp4";
+import pokharaVid from "../assets/VIdeos/Pokhara.mp4";
+import mustangVid from "../assets/VIdeos/Upper mustang.mp4";
 // Cultural Heritages Data
 export const culturalHeritages = [
   // Basantapur Durbar Square
@@ -173,9 +187,11 @@ export const culturalHeritages = [
 export const touristPlaces = [
   // Langtang
   {
-    id: 1,
+    id: 11,
     name: "Langtang",
+    vid: langtangVid,
     location: "Langtang National Park, Nepal",
+    img: langtang,
     description:
       "A stunning valley known for its breathtaking landscapes and trekking routes.",
     detailedDescription:
@@ -185,6 +201,7 @@ export const touristPlaces = [
         id: 30,
         name: "Langtang Valley Lodge",
         location: "Kyanjin Gompa, Langtang",
+        img: langtangValleyLodge,
         description: "A cozy lodge with stunning mountain views.",
         detailedDescription:
           "Langtang Valley Lodge provides comfortable accommodation with local cuisine, making it an excellent base for trekkers exploring the Langtang region.",
@@ -194,6 +211,7 @@ export const touristPlaces = [
         id: 31,
         name: "Kyanjin Gompa Hotel",
         location: "Kyanjin Gompa, Langtang",
+        img: kyanjinGompaHotel,
         description: "A friendly hotel offering a warm atmosphere.",
         detailedDescription:
           "Kyanjin Gompa Hotel is perfect for trekkers, providing basic amenities and delicious local meals.",
@@ -204,9 +222,11 @@ export const touristPlaces = [
 
   // Mount Everest
   {
-    id: 2,
+    id: 12,
     name: "Mount Everest",
+    vid: mtEverest,
     location: "Sagarmatha National Park, Nepal",
+    img: everest,
     description:
       "The highest mountain in the world, attracting adventurers and climbers.",
     detailedDescription:
@@ -216,6 +236,7 @@ export const touristPlaces = [
         id: 32,
         name: "Everest View Hotel",
         location: "Syangboche, near Namche Bazaar",
+        img: everestView,
         description: "A luxury hotel with breathtaking views of Mount Everest.",
         detailedDescription:
           "Everest View Hotel is one of the highest-placed hotels in the world, offering stunning views of Everest and comfortable accommodations.",
@@ -224,6 +245,7 @@ export const touristPlaces = [
       {
         id: 33,
         name: "Lukla Hotel",
+        img: luklaHotel,
         location: "Lukla, Nepal",
         description: "A comfortable hotel serving trekkers heading to Everest.",
         detailedDescription:
@@ -235,9 +257,11 @@ export const touristPlaces = [
 
   // Pokhara
   {
-    id: 3,
+    id: 13,
     name: "Pokhara",
+    vid: pokharaVid,
     location: "Pokhara, Nepal",
+    img: pokhara,
     description:
       "A beautiful city known for its lakes and stunning mountain views.",
     detailedDescription:
@@ -245,6 +269,7 @@ export const touristPlaces = [
     hotels: [
       {
         id: 34,
+        img: hotelFewaLake,
         name: "Hotel Fewa Lake",
         location: "Lakeside, Pokhara",
         description: "A lakeside hotel with beautiful views of Fewa Lake.",
@@ -254,6 +279,7 @@ export const touristPlaces = [
       },
       {
         id: 35,
+        img: pokharaGrande,
         name: "Pokhara Grande Hotel",
         location: "Pokhara, Nepal",
         description: "A luxury hotel with modern amenities.",
@@ -266,8 +292,10 @@ export const touristPlaces = [
 
   // Mustang
   {
-    id: 4,
+    id: 14,
     name: "Mustang",
+    vid: mustangVid,
+    img: mustang,
     location: "Mustang District, Nepal",
     description:
       "A remote region known for its unique culture and stunning landscapes.",
@@ -276,6 +304,7 @@ export const touristPlaces = [
     hotels: [
       {
         id: 36,
+        img: hotelMustang,
         name: "Hotel Mustang Resort",
         location: "Jomsom, Mustang",
         description:
@@ -287,6 +316,7 @@ export const touristPlaces = [
       {
         id: 37,
         name: "Thakali Lodge",
+        img: thakaliLodge,
         location: "Kagbeni, Mustang",
         description: "A charming lodge reflecting local architecture.",
         detailedDescription:

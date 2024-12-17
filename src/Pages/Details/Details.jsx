@@ -4,6 +4,28 @@ import { culturalHeritages, touristPlaces } from "../../constants";
 import axios from "axios";
 import Map from "../../components/Map/Map";
 
+// Hotel Card Component
+const HotelCard = ({ hotel }) => (
+  <div className="hotel-card p-4 bg-white rounded-lg shadow-lg flex flex-col items-center">
+    <img
+      src={hotel.img}
+      alt={hotel.name}
+      className="w-full h-48 object-cover rounded-lg mb-4"
+    />
+    <h3 className="text-xl font-semibold text-gray-800">{hotel.name}</h3>
+    <p className="text-gray-600">{hotel.location}</p>
+    <p className="text-gray-700 mt-2">{hotel.description}</p>
+    <div className="mt-3">
+      <h4 className="text-md font-medium text-gray-800">Amenities:</h4>
+      <ul className="list-disc pl-5 text-gray-600">
+        {hotel.amenities.map((amenity, index) => (
+          <li key={index}>{amenity}</li>
+        ))}
+      </ul>
+    </div>
+  </div>
+);
+
 const Details = () => {
   const { id } = useParams();
   const [place, setPlace] = useState(null);
@@ -107,6 +129,17 @@ const Details = () => {
               onRouteCalculated={handleRouteCalculated}
             />
           )}
+
+          {/* Hotel Cards */}
+          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {place.hotels && place.hotels.length > 0 ? (
+              place.hotels.map((hotel) => (
+                <HotelCard key={hotel.id} hotel={hotel} />
+              ))
+            ) : (
+              <p>No hotels available for this place.</p>
+            )}
+          </div>
         </div>
       ) : (
         <p className="text-center text-gray-500">Loading place details...</p>

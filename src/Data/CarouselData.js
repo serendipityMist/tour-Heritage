@@ -1,15 +1,18 @@
+import boudha from "../Pages/Home/Boudha.jpeg";
+import manakamana from "../Pages/Home/Manakamana.jpeg";
+import pashupati from "../Pages/Home/pashupati.jpeg";
 const data = {
   slides: [
     {
-      src: "https://picsum.photos/seed/img1/600/400",
+      src: boudha,
       alt: "Image 1 for carousel",
     },
     {
-      src: "https://picsum.photos/seed/img2/600/400",
+      src: manakamana,
       alt: "Image 2 for carousel",
     },
     {
-      src: "https://picsum.photos/seed/img3/600/400",
+      src: pashupati,
       alt: "Image 3 for carousel",
     },
   ],

@@ -24,6 +24,7 @@ const router = createBrowserRouter(
       <Route path="explore" element={<Link3 />} />
       <Route path="link4" element={<Link4 />} />
       <Route path="details/:id" element={<Details />} />
+
       {/* Add details route */}
     </Route>
   )

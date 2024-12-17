@@ -14,7 +14,7 @@ export default function Navbar() {
   };
 
   return (
-    <header className="shadow bg-transparent z-50 top-0 bg-gradient-to-r from-yellow-500 via-red-600 to-yellow-500 text-black">
+    <header className="shadow bg-transparent z-50 top-0 bg-gradient-to-r text-black w-11/12 bg-green-600">
       {" "}
       {/* Change z-99 to z-50 */}
       <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2">
@@ -51,28 +51,73 @@ export default function Navbar() {
           >
             <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
               <li>
-                <NavLink to="/" onClick={closeMenu}>
+                <NavLink
+                  to="/"
+                  onClick={closeMenu}
+                  className={({ isActive }) =>
+                    `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100
+                  ${
+                    isActive ? "text-orange-600" : "text-gray-500"
+                  } hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                  }
+                >
                   Home
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/about" onClick={closeMenu}>
+                <NavLink
+                  to="/about"
+                  onClick={closeMenu}
+                  className={({ isActive }) =>
+                    `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100
+                  ${
+                    isActive ? "text-orange-600" : "text-gray-500"
+                  } hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                  }
+                >
                   About Us
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/explore" onClick={closeMenu}>
+                <NavLink
+                  to="/explore"
+                  onClick={closeMenu}
+                  className={({ isActive }) =>
+                    `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100
+                  ${
+                    isActive ? "text-orange-600" : "text-gray-500"
+                  } hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                  }
+                >
                   Explore
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/activites" onClick={closeMenu}>
+                <NavLink
+                  to="/activites"
+                  onClick={closeMenu}
+                  className={({ isActive }) =>
+                    `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100
+                  ${
+                    isActive ? "text-orange-600" : "text-gray-500"
+                  } hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                  }
+                >
                   Activities
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/link4" onClick={closeMenu}>
-                  Bookmarks
+                <NavLink
+                  to="/link4"
+                  onClick={closeMenu}
+                  className={({ isActive }) =>
+                    `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100
+                  ${
+                    isActive ? "text-orange-600" : "text-gray-500"
+                  } hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                  }
+                >
+                  Contact Us
                 </NavLink>
               </li>
             </ul>
