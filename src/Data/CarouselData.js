@@ -1,19 +1,20 @@
-import boudha from "../Pages/Home/Boudha.jpeg";
-import manakamana from "../Pages/Home/Manakamana.jpeg";
 import pashupati from "../Pages/Home/pashupati.jpeg";
+import everest from "./everestSlider.jpeg";
+import slider from "./sliderImage.jpeg";
+
 const data = {
   slides: [
     {
-      src: boudha,
-      alt: "Image 1 for carousel",
-    },
-    {
-      src: manakamana,
-      alt: "Image 2 for carousel",
+      src: everest,
+      alt: "Everest Image for carousel",
     },
     {
       src: pashupati,
-      alt: "Image 3 for carousel",
+      alt: "Pashupati for carousel",
+    },
+    {
+      src: slider,
+      alt: "Slider for carousel",
     },
   ],
 };

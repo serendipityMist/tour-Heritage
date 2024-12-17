@@ -30,11 +30,13 @@ export const Carousel = ({ data }) => {
           className={`absolute w-full h-full object-cover transition-opacity duration-1000 ${
             slide === idx ? "opacity-100" : "opacity-0"
           }`}
+          style={{ filter: "brightness(0.7)" }} // Darken image slightly
         />
       ))}
+      <div className="absolute inset-0 bg-black opacity-60 h-full w-full"></div>
 
       <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-        {data.slides.map((_, idx) => (
+        {/* {data.slides.map((_, idx) => (
           <button
             key={idx}
             onClick={() => setSlide(idx)}
@@ -42,7 +44,7 @@ export const Carousel = ({ data }) => {
               slide === idx ? "bg-white" : "bg-gray-400"
             }`}
           ></button>
-        ))}
+        ))} */}
       </div>
     </div>
   );

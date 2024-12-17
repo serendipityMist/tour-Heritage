@@ -1,19 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "../../assets/Logo.png";
 
 const Footer = () => {
   return (
-    <footer className="bg-black text-gray-300 py-8">
+    <footer className="bg-[#0f2310] text-gray-300 py-8">
       <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
         {/* Company Info */}
         <div>
           <h2 className="text-xl font-semibold mb-3 text-white">GPT</h2>
           <p className="text-sm md:text-base">
             Experience the rich cultural heritage and breathtaking landscapes of
-            Nepal. From ancient temples and vibrant festivals to the majestic
-            Himalayas, we bring you unforgettable journeys into the heart of
-            Nepal's traditions and natural beauty.
+            Nepal.
           </p>
         </div>
 
@@ -25,7 +22,7 @@ const Footer = () => {
           <ul className="space-y-1">
             <li>
               <Link
-                to="/about-us"
+                to="/about"
                 className="hover:text-white text-sm md:text-base"
               >
                 About Us
@@ -33,25 +30,19 @@ const Footer = () => {
             </li>
             <li>
               <Link
-                to="/contact-us"
+                to="/link4"
                 className="hover:text-white text-sm md:text-base"
               >
                 Contact Us
               </Link>
             </li>
             <li>
-              <Link
-                to="/privacy-policy"
-                className="hover:text-white text-sm md:text-base"
-              >
+              <Link to="/" className="hover:text-white text-sm md:text-base">
                 Privacy Policy
               </Link>
             </li>
             <li>
-              <Link
-                to="/terms"
-                className="hover:text-white text-sm md:text-base"
-              >
+              <Link to="/" className="hover:text-white text-sm md:text-base">
                 Terms & Conditions
               </Link>
             </li>
@@ -85,13 +76,16 @@ const Footer = () => {
         {/* Newsletter */}
         <div>
           <h3 className="text-lg font-semibold mb-2 text-white">Newsletter</h3>
-          <form className="flex flex-col md:flex-row">
+          <form className="flex flex-col md:flex-row md:flex-wrap gap-2">
             <input
               type="email"
               placeholder="Your email address"
-              className="p-2 rounded-lg mb-2 md:mb-0 md:w-60 text-black"
+              className="p-2 rounded-lg w-full md:w-3/4 text-black"
             />
-            <button className="border border-black p-2 ml-0 md:ml-2 bg-white text-black rounded-lg font-bold">
+            <button
+              type="submit"
+              className="p-2 bg-[#ff5722] text-white rounded-lg font-bold w-full md:w-auto"
+            >
               Subscribe
             </button>
           </form>

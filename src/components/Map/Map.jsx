@@ -220,7 +220,7 @@ export default function Map({
 
   return (
     <div
-      className="m-1"
+      className="m-1 mb-4"
       id={mapContainerId.current}
       style={{
         height: "50%",

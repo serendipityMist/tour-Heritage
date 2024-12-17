@@ -1,174 +1,202 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // For navigation
 import { motion } from "framer-motion";
+import illustration from "./illustration.jpeg";
 
 const AnimatedForm = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
   const [isSignup, setIsSignup] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Track if user is logged in
-  const [userData, setUserData] = useState(null); // Store user data for profile image display
-
-  const navigate = useNavigate(); // Use the navigate function for redirection
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setErrorMessage("");
+    setSuccessMessage("");
 
-    const formData = new FormData(event.target);
-    const data = {
-      email: formData.get("email"),
-      password: formData.get("password"),
-      username: formData.get("username"),
-    };
-
-    // Simple form validation
-    if (!data.email || !data.password) {
-      alert("Email and Password are required");
-      return;
-    }
-
-    if (isSignup && !data.username) {
-      alert("Username is required for signup");
-      return;
-    }
-
-    // Mock API call
-    mockApiCall(data);
-  };
-
-  const mockApiCall = async (data) => {
-    try {
-      // Simulate a delay for the API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      if (isSignup) {
-        // Simulating username check
-        if (data.username === "takenUser") {
-          alert("Username is already taken.");
+    if (isSignup) {
+      if (name && email && password && confirmPassword) {
+        if (password !== confirmPassword) {
+          setErrorMessage("Passwords do not match.");
           return;
         }
-        alert("Sign Up Successful!");
-        setUserData({
-          username: data.username,
-          profileImage: "https://www.example.com/user-profile.jpg", // Mock profile image URL
-        });
-        setIsLoggedIn(true); // User is logged in after successful signup
+        setSuccessMessage("Signup Successful!");
+        alert("Signup Successful! Please login.");
+        setIsSignup(false);
+        setName("");
+        setEmail("");
+        setPassword("");
+        setConfirmPassword("");
       } else {
-        // Simulating login check
-        if (data.email !== "test@test.com" || data.password !== "password123") {
-          alert("Invalid email or password.");
-          return;
-        }
-        alert("Login Successful!");
-        setUserData({
-          username: data.email.split("@")[0], // Mock username from email
-          profileImage: "https://www.example.com/user-profile.jpg", // Mock profile image URL
-        });
-        setIsLoggedIn(true); // User is logged in after successful login
+        setErrorMessage("Please fill out all fields.");
       }
-
-      // Redirect to home page after successful login/signup
-      navigate("/");
-    } catch (error) {
-      alert("Something went wrong. Please try again later.");
+    } else {
+      if (email && password) {
+        setSuccessMessage("Login Successful!");
+        alert("Login Successful! Redirecting to Explore page...");
+        navigate("/explore");
+        setEmail("");
+        setPassword("");
+      } else {
+        setErrorMessage("Invalid email or password.");
+      }
     }
-  };
-
-  const toggleForm = () => {
-    setIsSignup((prev) => !prev);
-  };
-
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-    setUserData(null);
-    navigate("/login"); // Redirect to login page after logout
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
+    <div className="flex flex-col lg:flex-row h-screen bg-gradient-to-r from-purple-400 to-blue-500">
+      {/* Left Section with Illustration */}
+      <div className="hidden lg:flex flex-1 items-center justify-center bg-white px-6 py-4">
+        <div className="flex flex-col items-center">
+          <div className="w-60 h-60 bg-gray-100 rounded-full flex items-center justify-center overflow-hidden">
+            <img
+              src={illustration}
+              alt="Join Us Illustration"
+              className="object-cover w-full h-full"
+            />
+          </div>
+          <p className="text-lg mt-4 text-gray-700 font-medium">
+            Welcome Back! Please log in to continue.
+          </p>
+        </div>
+      </div>
+
+      {/* Right Section with Form */}
       <motion.div
-        className="bg-white p-6 rounded-lg shadow-lg w-96"
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.3 }}
+        className="flex-1 flex items-center justify-center bg-white px-6 py-4"
+        initial={{ opacity: 0, x: 100 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.5 }}
       >
-        {isLoggedIn ? (
-          <>
-            <h2 className="text-2xl font-bold mb-4 text-center">
-              Welcome, {userData.username}
-            </h2>
-            <div className="mt-6 flex justify-center">
-              <img
-                src={userData.profileImage}
-                alt="User Profile"
-                className="w-16 h-16 rounded-full"
-              />
-              <p className="ml-2 text-lg">{userData.username}</p>
-            </div>
-            <button
-              onClick={handleLogout}
-              className="w-full bg-red-500 text-white py-2 rounded mt-4 hover:bg-red-600 transition-all duration-300"
-            >
-              Logout
-            </button>
-          </>
-        ) : (
-          <>
-            <h2 className="text-2xl font-bold mb-4 text-center">
-              {isSignup ? "Sign Up" : "Login"}
-            </h2>
+        <div className="bg-gray-50 p-8 rounded-lg shadow-md w-full max-w-md">
+          <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
+            {isSignup ? "Sign Up" : "Log In"}
+          </h2>
 
-            <form onSubmit={handleSubmit}>
-              {isSignup && (
-                <div className="mb-4">
-                  <label className="block text-sm font-medium mb-1">
-                    Username
-                  </label>
-                  <input
-                    type="text"
-                    name="username"
-                    className="border rounded w-full py-2 px-3"
-                    placeholder="Username"
-                  />
-                </div>
-              )}
-
-              <div className="mb-4">
-                <label className="block text-sm font-medium mb-1">Email</label>
+          <form onSubmit={handleSubmit} className="space-y-5">
+            {/* Name Field (Only in Signup) */}
+            {isSignup && (
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Name
+                </label>
                 <input
-                  type="email"
-                  name="email"
-                  className="border rounded w-full py-2 px-3"
-                  placeholder="Email"
+                  type="text"
+                  placeholder="Your Full Name"
+                  className="w-full mt-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                 />
               </div>
+            )}
 
-              <div className="mb-4">
-                <label className="block text-sm font-medium mb-1">
-                  Password
+            {/* Email */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Email
+              </label>
+              <input
+                type="email"
+                placeholder="Your Email Address"
+                className="w-full mt-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+
+            {/* Password */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Password
+              </label>
+              <input
+                type="password"
+                placeholder="Your Password"
+                className="w-full mt-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+
+            {/* Confirm Password */}
+            {isSignup && (
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Confirm Password
                 </label>
                 <input
                   type="password"
-                  name="password"
-                  className="border rounded w-full py-2 px-3"
-                  placeholder="Password"
+                  placeholder="Confirm Password"
+                  className="w-full mt-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
                 />
               </div>
+            )}
 
-              <button
-                type="submit"
-                className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition-all duration-300 ease-in-out"
-              >
-                {isSignup ? "Sign Up" : "Login"}
-              </button>
-            </form>
+            {/* Submit Button */}
+            <button
+              type="submit"
+              className="w-full bg-green-500 text-white font-medium py-2 rounded-lg hover:bg-green-600 transition duration-300"
+            >
+              {isSignup ? "Sign Up" : "Log In"}
+            </button>
+          </form>
 
-            <p className="text-center mt-4">
-              {isSignup ? "Already have an account?" : "Don't have an account?"}
-              <button onClick={toggleForm} className="text-blue-500">
-                {isSignup ? " Login" : " Sign Up"}
-              </button>
+          {/* Error or Success Message */}
+          {errorMessage && (
+            <p className="text-sm text-center text-red-500 mt-4">
+              {errorMessage}
             </p>
-          </>
-        )}
+          )}
+          {successMessage && (
+            <p className="text-sm text-center text-green-500 mt-4">
+              {successMessage}
+            </p>
+          )}
+
+          {/* Switch Between Forms */}
+          <div className="text-center mt-5">
+            {isSignup ? (
+              <p className="text-gray-700">
+                Already have an account?{" "}
+                <button
+                  onClick={() => setIsSignup(false)}
+                  className="text-blue-500 font-medium"
+                >
+                  Log In
+                </button>
+              </p>
+            ) : (
+              <p className="text-gray-700">
+                Don't have an account?{" "}
+                <button
+                  onClick={() => setIsSignup(true)}
+                  className="text-blue-500 font-medium"
+                >
+                  Sign Up
+                </button>
+              </p>
+            )}
+          </div>
+
+          {/* Social Login */}
+          <div className="flex items-center justify-center mt-6 space-x-4">
+            <button className="p-2 bg-red-500 text-white rounded-full hover:bg-red-600">
+              G+
+            </button>
+            <button className="p-2 bg-blue-600 text-white rounded-full hover:bg-blue-700">
+              Facebook
+            </button>
+            <button className="p-2 bg-gray-800 text-white rounded-full hover:bg-gray-900">
+              Github
+            </button>
+          </div>
+        </div>
       </motion.div>
     </div>
   );

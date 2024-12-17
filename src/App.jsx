@@ -5,9 +5,11 @@ import Navbar from "./components/Header/Navbar";
 function App() {
   return (
     <>
-      <Navbar />
-      <Outlet />
-      <Footer />
+      <main className="bg-[#f5f5f5]">
+        <Navbar />
+        <Outlet />
+        <Footer />
+      </main>
     </>
   );
 }

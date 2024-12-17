@@ -19,7 +19,7 @@ export default function Navbar() {
           {/* Logo - Replaced with GptTours */}
           <Link
             to="/"
-            className="flex items-center text-3xl font-bold text-blue-500"
+            className="flex items-center text-3xl font-bold text-[#333]"
           >
             GptTours
           </Link>
@@ -61,8 +61,8 @@ export default function Navbar() {
                   onClick={closeMenu}
                   className={({ isActive }) =>
                     `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100
-                  ${isActive ? "text-orange-600" : "text-gray-500"} 
-                  hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                  ${isActive ? "text-[#333] font-bold" : "text-gray-500"} 
+                  hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-black lg:p-0`
                   }
                 >
                   Home
@@ -74,8 +74,8 @@ export default function Navbar() {
                   onClick={closeMenu}
                   className={({ isActive }) =>
                     `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100
-                  ${isActive ? "text-orange-600" : "text-gray-500"} 
-                  hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                  ${isActive ? "text-[#333] font-bold " : "text-gray-500"} 
+                  hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-black hover:font-semibold  lg:p-0`
                   }
                 >
                   About Us
@@ -87,8 +87,8 @@ export default function Navbar() {
                   onClick={closeMenu}
                   className={({ isActive }) =>
                     `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100
-                  ${isActive ? "text-orange-600" : "text-gray-500"} 
-                  hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                  ${isActive ? "text-[#333]" : "text-gray-500"} 
+                  hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-black hover:font-semibold lg:p-0`
                   }
                 >
                   Explore
@@ -100,8 +100,8 @@ export default function Navbar() {
                   onClick={closeMenu}
                   className={({ isActive }) =>
                     `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100
-                  ${isActive ? "text-orange-600" : "text-gray-500"} 
-                  hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                  ${isActive ? "text-[#333]" : "text-gray-500"} 
+                  hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-black hover:font-semibold lg:p-0`
                   }
                 >
                   Activities
@@ -113,8 +113,8 @@ export default function Navbar() {
                   onClick={closeMenu}
                   className={({ isActive }) =>
                     `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100
-                  ${isActive ? "text-orange-600" : "text-gray-500"} 
-                  hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                  ${isActive ? "text-[#333]" : "text-gray-500"} 
+                  hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-black hover:font-semibold lg:p-0`
                   }
                 >
                   Contact Us
@@ -125,12 +125,12 @@ export default function Navbar() {
                   to="/form"
                   onClick={closeMenu}
                   className={({ isActive }) =>
-                    `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100
-                  ${isActive ? "text-orange-600" : "text-gray-500"} 
-                  hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                    `block py-2 pr-4 pl-3 duration-200 
+                  ${isActive ? "text-[#333]" : "text-gray-500"} 
+                  hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-black hover:font-semibold lg:p-0 border `
                   }
                 >
-                  LogIn/SignUp
+                  Join Us
                 </NavLink>
               </li>
             </ul>

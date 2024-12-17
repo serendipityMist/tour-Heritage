@@ -57,22 +57,21 @@ const SearchBar = () => {
         placeholder="Search location"
         value={query}
         onChange={handleInputChange}
-        className="w-full p-3 bg-white/40 text-white placeholder-white border border-white/70 rounded-lg focus:outline-none focus:ring-1 focus:ring-white focus:ring-opacity-75"
-        autoFocus
-        onFocus={() => setIsExpanded(true)} // Expand on focus
+        className="w-full p-3 bg-transparent placeholder-white border border-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-md transition-all duration-300 text-white"
       />
-      <p className="mt-4 text-lg sm:text-2xl md:text-3xl font-bold text-white">
+      {/* Heading */}
+      <p className="relative z-10 mt-4 text-2xl font-serif sm:text-2xl md:text-3xl font-bold text-white drop-shadow-lg">
         Where Would You Like To Go?
       </p>
 
       {/* Dropdown List */}
       {isExpanded && filteredResults.length > 0 && (
-        <ul className="absolute z-10 w-full sm:max-w-md md:max-w-lg bg-white/70 backdrop-blur-lg border border-white/50 rounded shadow-lg mt-2 max-h-60 overflow-y-auto">
+        <ul className="absolute z-10 w-full sm:max-w-md md:max-w-lg bg-gray-800/80 backdrop-blur-lg border border-gray-600/50 rounded shadow-lg mt-2 max-h-60 overflow-y-auto">
           {filteredResults.map((item) => (
             <li
               key={item.id}
               onClick={() => handleResultClick(item.id)}
-              className="p-2 text-black hover:bg-gray-100 cursor-pointer"
+              className="p-2 text-white hover:bg-gray-700 cursor-pointer"
             >
               <strong>{item.name}</strong> <span>({item.location})</span>
             </li>

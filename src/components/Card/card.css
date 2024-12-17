@@ -1,0 +1,13 @@
+/* Add this to your global styles or the component's CSS file */
+.card-container {
+  perspective: 1500px;
+}
+
+.card-container .card {
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease-in-out;
+}
+
+.card-container .card:hover {
+  transform: rotateY(15deg) rotateX(15deg);
+}

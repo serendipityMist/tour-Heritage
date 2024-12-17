@@ -15,14 +15,14 @@ function Link3() {
   const combinedPlaces = [...culturalHeritages, ...touristPlaces];
 
   return (
-    <section className="p-4 bg-gray-100">
+    <section className="p-4 bg-gray-100 mb-8">
       {/* Page Heading */}
-      <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">
+      <h1 className="text-3xl font-bold text-center mb-7 text-gray-800">
         Explore Cultural Heritages & Tourist Places
       </h1>
 
       {/* Cards Container */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 gap-y-10 mt-8">
         {combinedPlaces.map((place) => (
           <Card
             data={place}

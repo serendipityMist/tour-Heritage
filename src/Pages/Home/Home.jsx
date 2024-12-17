@@ -9,9 +9,9 @@ import basantapur from "../../assets/Images/Basantapur.jpg";
 import langtang from "../../assets/Images/lantang-valley.jpg";
 import mustang from "../../assets/Images/mustang.jpg";
 import hero from "./heroSection.jpg";
-import boudha from "./Boudha.jpeg";
-import manakamana from "./Manakamana.jpeg";
-import pashupatiImg from "./pashupati.jpeg";
+import lumbini from "./lumbini.jpeg";
+import stupa from "./stupa.jpeg";
+import FAQAccordion from "../../components/Accordion/FAQAccordion";
 
 const Home = () => {
   const sections = [
@@ -81,7 +81,7 @@ const Home = () => {
 
   return (
     <>
-      <section className="relative flex items-center justify-center w-full h-[600px]">
+      <section className="relative flex items-center justify-center w-full h-[600px] bg-[#f5f5f5]">
         {/* Carousel */}
         <Carousel data={data} />
 
@@ -92,14 +92,10 @@ const Home = () => {
       </section>
 
       {/* Explore section */}
-      <section className="relative w-full bg-green-500 my-1 py-5">
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-black opacity-50"></div>
-
-        {/* Content Wrapper */}
+      <section className="relative w-full bg-[#edf7ee]  py-5">
         <div className="relative flex flex-col md:flex-row justify-between items-center w-full h-auto gap-y-8 md:gap-4 px-4 md:px-8">
           {/* Left Section with Text */}
-          <div className="text-white z-10 w-full md:w-1/2 space-y-6 text-center md:text-left">
+          <div className="text-[#333] z-10 w-full md:w-1/2 space-y-6 text-center md:text-left">
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight">
               Explore Nepal's Heritage
             </h1>
@@ -108,8 +104,8 @@ const Home = () => {
               historical landmarks that make Nepal a unique and vibrant
               destination.
             </p>
-            <button className="relative bg-yellow-500 text-black py-2 px-6 rounded-lg overflow-hidden group transition duration-300 ease-in-out mx-auto md:mx-0">
-              <span className="absolute inset-0 bg-yellow-600 scale-x-0 origin-left transition-transform duration-300 ease-out group-hover:scale-x-100"></span>
+            <button className="relative bg-[#4caf50] text-white py-2 px-6 rounded-lg overflow-hidden group transition duration-300 ease-in-out mx-auto md:mx-0">
+              <span className="absolute inset-0 bg-green-500 scale-x-0 origin-left transition-transform duration-300 ease-out group-hover:scale-x-100"></span>
               <Link
                 to={"/explore"}
                 className="relative z-10 block font-semibold group-hover:text-black transition duration-300"
@@ -130,93 +126,109 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="my-8 border border-black p-4">
-        <h1 className="font-bold text-2xl mb-2">Trending Destinations</h1>
-        <p className="text-lg mb-4">Places to Visit in Nepal</p>
+      <section className="my-8  p-4">
+        <h1 className="font-bold text-center text-3xl mb-2">
+          Trending Destinations
+        </h1>
+        <p className="text-xl text-center mb-4">Places to Visit in Nepal</p>
 
-        <div className="border border-green-700 w-full my-4 flex flex-wrap gap-4 justify-evenly py-2 md:justify-center">
-          {/* Dynamic click handling for Everest */}
+        <div className="  w-full my-4 flex flex-wrap gap-4 justify-evenly py-2 md:justify-center">
+          {/* Dynamic click handling for Basantapur */}
           <div
-            className="relative w-full sm:w-1/2 md:w-1/3 lg:w-[49%] max-h-[300px]"
-            onClick={() => handleDestinationClick(1)} // Handle click for Everest
+            className="relative w-full sm:w-1/2 md:w-1/3 lg:w-[49%] max-h-[300px] group overflow-hidden rounded-lg"
+            onClick={() => handleDestinationClick(1)} // Handle click for Basantapur
           >
             <img
               src={basantapur}
               alt="Basantapur"
-              className="w-full h-full object-cover rounded-lg aspect-[16/9]"
+              className="cursor-pointer w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-110"
             />
-            <div className="absolute bottom-0 left-0 p-4 bg-gradient-to-t from-black to-transparent text-white font-bold">
+            {/* Hover overlay with subtle color change */}
+            <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-40 transition-opacity duration-500 ease-in-out"></div>
+            <div className="absolute bottom-0 left-0 p-4 bg-gradient-to-t from-black to-transparent text-white font-bold z-10">
               Basantapur
             </div>
           </div>
 
           {/* Dynamic click handling for Pashupati */}
           <div
-            className="relative w-full sm:w-1/2 md:w-1/3 lg:w-[49%] max-h-[300px]"
+            className="relative w-full sm:w-1/2 md:w-1/3 lg:w-[49%] max-h-[300px] group overflow-hidden rounded-lg"
             onClick={() => handleDestinationClick(2)} // Handle click for Pashupati
           >
             <img
               src={pashupati}
               alt="Pashupati"
-              className="w-full h-full object-cover rounded-lg aspect-[16/9]"
+              className="cursor-pointer w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-110"
             />
-            <div className="absolute bottom-0 left-0 p-4 bg-gradient-to-t from-black to-transparent text-white font-bold">
+            {/* Hover overlay with subtle color change */}
+            <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-40 transition-opacity duration-500 ease-in-out"></div>
+            <div className="absolute bottom-0 left-0 p-4 bg-gradient-to-t from-black to-transparent text-white font-bold z-10">
               Pashupati
             </div>
           </div>
         </div>
+
         {/* Second set of destinations */}
-        <div className="border border-purple-700 my-4 w-full flex flex-wrap gap-4 justify-evenly py-2">
-          {/* Dynamic click handling for Everest */}
+        <div className=" my-4 w-full flex flex-wrap gap-4 justify-evenly py-2">
+          {/* Dynamic click handling for Langtang */}
           <div
-            className="relative w-full sm:w-1/2 md:w-1/3 lg:w-[32%] max-h-[300px]"
-            onClick={() => handleDestinationClick(11)} // Handle click for Everest
+            className="relative w-full sm:w-1/2 md:w-1/3 lg:w-[32%] max-h-[300px] group overflow-hidden rounded-lg"
+            onClick={() => handleDestinationClick(11)} // Handle click for Langtang
           >
             <img
               src={langtang}
               alt="Langtang"
-              className="w-full h-full object-cover rounded-lg aspect-[16/9]"
+              className="cursor-pointer w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-110"
             />
-            <div className="absolute bottom-0 left-0 p-4 bg-gradient-to-t from-black to-transparent text-white font-bold">
+            {/* Hover overlay with subtle color change */}
+            <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-40 transition-opacity duration-500 ease-in-out"></div>
+            <div className="absolute bottom-0 left-0 p-4 bg-gradient-to-t from-black to-transparent text-white font-bold z-10">
               Langtang
             </div>
           </div>
 
-          {/* Dynamic click handling for Pashupati */}
+          {/* Dynamic click handling for Everest */}
           <div
-            className="relative w-full sm:w-1/2 md:w-1/3 lg:w-[32%] max-h-[300px]"
-            onClick={() => handleDestinationClick(12)} // Handle click for Pashupati
+            className="relative w-full sm:w-1/2 md:w-1/3 lg:w-[32%] max-h-[300px] group overflow-hidden rounded-lg"
+            onClick={() => handleDestinationClick(12)} // Handle click for Everest
           >
             <img
               src={everest}
               alt="Mount Everest"
-              className="w-full h-full object-cover rounded-lg aspect-[16/9]"
+              className="cursor-pointer w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-110"
             />
-            <div className="absolute bottom-0 left-0 p-4 bg-gradient-to-t from-black to-transparent text-white font-bold">
-              Pashupati
+            {/* Hover overlay with subtle color change */}
+            <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-40 transition-opacity duration-500 ease-in-out"></div>
+            <div className="absolute bottom-0 left-0 p-4 bg-gradient-to-t from-black to-transparent text-white font-bold z-10">
+              Everest
             </div>
           </div>
 
-          {/* Dynamic click handling for Everest again */}
+          {/* Dynamic click handling for Mustang */}
           <div
-            className="relative w-full sm:w-1/2 md:w-1/3 lg:w-[32%] max-h-[300px]"
-            onClick={() => handleDestinationClick(14)} // Handle click for Everest again
+            className="relative w-full sm:w-1/2 md:w-1/3 lg:w-[32%] max-h-[300px] group overflow-hidden rounded-lg"
+            onClick={() => handleDestinationClick(14)} // Handle click for Mustang
           >
             <img
               src={mustang}
               alt="Mustang"
-              className="w-full h-full object-cover rounded-lg aspect-[16/9]"
+              className="hover:cursor-pointer w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-110"
             />
-            <div className="absolute bottom-0 left-0 p-4 bg-gradient-to-t from-black to-transparent text-white font-bold">
+            {/* Hover overlay with subtle color change */}
+            <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-40 transition-opacity duration-500 ease-in-out"></div>
+            <div className="absolute bottom-0 left-0 p-4 bg-gradient-to-t from-black to-transparent text-white font-bold z-10">
               Mustang
             </div>
           </div>
         </div>
       </section>
+      <section className="w-full bg-[#ebebeb] py-12">
+        <FAQAccordion />
+      </section>
 
       {/* Customer Reviews Section */}
-      <section className="py-16 bg-white text-center">
-        <h2 className="text-4xl font-bold text-green-900 mb-4">
+      <section className="py-16 bg-[#f5f5f5] text-center my-2">
+        <h2 className="text-4xl font-bold text-[#333] mb-4">
           Customer Reviews
         </h2>
         <div className="max-w-2xl mx-auto">
@@ -248,19 +260,6 @@ const Home = () => {
                 <p className="text-sm text-gray-500">{review.title}</p>
               </div>
             </div>
-          </div>
-
-          {/* Customer Images */}
-          <div className="flex justify-center mt-8 space-x-4">
-            {review.additionalImgs.map((img, index) => (
-              <img
-                key={index}
-                src={img}
-                alt={`Customer ${index + 1}`}
-                className="w-12 h-12 rounded-full border-2 border-white cursor-pointer"
-                onClick={() => handleImageClick(index)}
-              />
-            ))}
           </div>
         </div>
       </section>

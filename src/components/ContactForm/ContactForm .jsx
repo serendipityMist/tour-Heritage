@@ -23,9 +23,9 @@ const ContactForm = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen  p-4 text-black bg-white inset-shadow-sm inset-shadow-white/20 shadow-lg ">
-      <div className="bg-white-500 p-6 rounded-lg shadow-lg w-full max-w-md sm:max-w-lg">
-        <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">
+    <div className="flex justify-center items-center min-h-screen  p-4 text-black inset-shadow-sm inset-shadow-white/20 ">
+      <div className="bg-[#c4c4c4] p-6 rounded-lg shadow-lg w-full max-w-md sm:max-w-lg">
+        <h2 className="text-2xl font-bold text-center mb-6 text-gray-800 text-[#333]">
           Contact Us
         </h2>
         {submitted ? (
@@ -101,7 +101,7 @@ const ContactForm = () => {
             {/* Submit Button */}
             <button
               type="submit"
-              className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-300"
+              className="w-full bg-green-500 text-white py-2 rounded-lg hover:bg-green-600 transition duration-300"
             >
               Send Message
             </button>
