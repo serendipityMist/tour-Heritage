@@ -3,7 +3,7 @@ import basantapur from "../assets/VIdeos/Basantapur.mp4";
 import janakpur from "../assets/VIdeos/Janakpur.mp4";
 import pashupati from "../assets/VIdeos/Pasupatinath.mp4";
 import swyambhu from "../assets/VIdeos/Swyambhu.mp4";
-// import hotelHeritage from "../assets/Images/hotel ambassador.jpg";
+
 import hotelManang from "../assets/Images/HOtel the rani mahal.jpg";
 import hotelCityPark from "../assets/Images/Hotel city part janakpur.jpg";
 import hotelMysticMithilia from "../assets/Images/mystic mithila janakpur.jpg";
