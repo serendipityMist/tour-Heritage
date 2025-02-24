@@ -2,29 +2,29 @@ import React, { useState } from "react";
 
 const FAQs = [
   {
-    question: "How do I choose the best savings account?",
+    question: "What are the top tourist destinations in Nepal?",
     answer:
-      "Choosing the best savings account depends on your financial needs, such as interest rates, account fees, and accessibility.",
+      "Nepal is home to many breathtaking destinations, including Mount Everest, Pokhara, Kathmandu Valley, Lumbini (the birthplace of Lord Buddha), and Chitwan National Park.",
   },
   {
-    question: "What is a savings account?",
+    question: "What is the best time to visit Nepal?",
     answer:
-      "A savings account is a deposit account held at a financial institution that provides a modest interest rate.",
+      "The best time to visit Nepal is during the spring (March to May) and autumn (September to November) seasons when the weather is pleasant, and the skies are clear.",
   },
   {
-    question: "What is compounding interest?",
+    question: "What cultural heritage sites can I explore in Nepal?",
     answer:
-      "Compounding interest is the process where the interest earned on an investment is reinvested to earn more interest.",
+      "Nepal boasts numerous UNESCO World Heritage Sites, including Kathmandu Durbar Square, Bhaktapur Durbar Square, Patan Durbar Square, Swayambhunath Stupa, and Pashupatinath Temple.",
   },
   {
-    question: "How often is interest compounded in savings accounts?",
+    question: "Are there any unique festivals celebrated in Nepal?",
     answer:
-      "Interest in savings accounts can be compounded daily, monthly, quarterly, or yearly, depending on the bank.",
+      "Yes, Nepal celebrates vibrant festivals like Dashain, Tihar, Holi, Buddha Jayanti, and the Indra Jatra, reflecting its rich cultural heritage and diversity.",
   },
   {
-    question: "Are there any fees associated with savings accounts?",
+    question: "What activities can tourists enjoy in Nepal?",
     answer:
-      "Some savings accounts may have monthly maintenance fees or minimum balance requirements.",
+      "Tourists can enjoy trekking in the Himalayas, paragliding in Pokhara, jungle safaris in Chitwan, cultural tours in the Kathmandu Valley, and rafting in the Trishuli River.",
   },
 ];
 
@@ -38,11 +38,11 @@ const FAQAccordion = () => {
   return (
     <section className="max-w-3xl mx-auto p-6 bg-[#f5f5f5] rounded-lg shadow-lg">
       <h2 className="text-3xl font-bold mb-4 text-center">
-        Answers to Common Questions
+        Frequently Asked Questions
       </h2>
       <p className="text-gray-600 mb-6 text-center">
-        Here are some of the most frequently asked questions about our services.
-        We hope this helps clarify any doubts you may have.
+        Discover more about Nepal’s local tourism and cultural heritage. Here
+        are some common questions answered for your convenience.
       </p>
       <div>
         {FAQs.map((faq, index) => (
