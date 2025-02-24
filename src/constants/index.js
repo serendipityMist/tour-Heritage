@@ -49,7 +49,7 @@ export const culturalHeritages = [
         id: 18,
         name: "Hotel Heritage",
         location: "Kathmandu, Nepal",
-        img: hotelHeritage,
+        img: { hotelHeritage },
         description:
           "A boutique hotel blending traditional charm with modern amenities.",
         detailedDescription:
